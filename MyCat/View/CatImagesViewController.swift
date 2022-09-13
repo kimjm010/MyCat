@@ -19,6 +19,8 @@ class CatImagesViewController: UIViewController {
     
     var catList = [Cat]()
     
+    var page = 0
+    
     private var refreshControl = UIRefreshControl()
 
     
@@ -30,7 +32,7 @@ class CatImagesViewController: UIViewController {
         imageCollectionView.refreshControl = refreshControl
         imageCollectionView.refreshControl?.addTarget(self, action: #selector(pullToRefresh(_:)), for: .valueChanged)
         
-      getRandomPic()
+      getRandomPic(page: page)
     }
     
     // MARK: - Refresh Collection View
@@ -39,7 +41,9 @@ class CatImagesViewController: UIViewController {
     /// 당겨서 imageCollectionView를 새로고침
     /// - Parameter sender: CatImagesViewController
     private func pullToRefresh(_ sender: Any) {
-        getRandomPic()
+        getRandomPic(page: 1)
+        catList.removeAll(keepingCapacity: true)
+        // TODO: Refresh하면 catList 초기화 하기
     }
     
     
@@ -57,12 +61,15 @@ class CatImagesViewController: UIViewController {
     
     // MARK: - Fetch Cat Image
     
-    private func getRandomPic() {
-
-        Network.shared.getRandomCatImages { data in
+    private func getRandomPic(page: Int) {
+        
+        self.page += 1
+        
+        Network.shared.getRandomCatImages(page: self.page) { data in
             do {
                 let res = try JSONDecoder().decode([Cat].self, from: data)
                 self.catList.append(contentsOf: res)
+                
                 print(self.catList.count)
                 
                 DispatchQueue.main.async {
@@ -135,7 +142,7 @@ extension CatImagesViewController: UICollectionViewDataSourcePrefetching {
         
         guard indexPaths.contains(where: { $0.row >= self.catList.count - 10 }) else { return }
         
-        getRandomPic()
+        getRandomPic(page: page)
     }
     
     

@@ -8,6 +8,9 @@ target 'MyCat' do
 pod 'Alamofire'
 pod 'ProgressHUD'
 pod 'Loaf'
+pod 'Gallery'
+
+
   # Pods for MyCat
 
 end

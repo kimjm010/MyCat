@@ -21,8 +21,8 @@
 		F59C879428D005C5000443C5 /* FavoriteViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F59C879328D005C5000443C5 /* FavoriteViewModel.swift */; };
 		F59C879628D005D1000443C5 /* MyUploadViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F59C879528D005D1000443C5 /* MyUploadViewModel.swift */; };
 		F59C879C28D00D25000443C5 /* ImagesCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F59C879B28D00D25000443C5 /* ImagesCollectionViewCell.swift */; };
-		F59C879F28D03ECE000443C5 /* Constant.swift in Sources */ = {isa = PBXBuildFile; fileRef = F59C879E28D03ECE000443C5 /* Constant.swift */; };
 		F59C87A928D054FA000443C5 /* Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = F59C87A828D054FA000443C5 /* Network.swift */; };
+		F59C87AB28D07714000443C5 /* SelectImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F59C87AA28D07714000443C5 /* SelectImageViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -44,8 +44,8 @@
 		F59C879328D005C5000443C5 /* FavoriteViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteViewModel.swift; sourceTree = "<group>"; };
 		F59C879528D005D1000443C5 /* MyUploadViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyUploadViewModel.swift; sourceTree = "<group>"; };
 		F59C879B28D00D25000443C5 /* ImagesCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagesCollectionViewCell.swift; sourceTree = "<group>"; };
-		F59C879E28D03ECE000443C5 /* Constant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constant.swift; sourceTree = "<group>"; };
 		F59C87A828D054FA000443C5 /* Network.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Network.swift; sourceTree = "<group>"; };
+		F59C87AA28D07714000443C5 /* SelectImageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectImageViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -95,7 +95,6 @@
 				F521183028CF84EB00A32CD9 /* LaunchScreen.storyboard */,
 				F59C878528CF86A4000443C5 /* ViewModel */,
 				F59C878428CF86A1000443C5 /* View */,
-				F59C879D28D03EB3000443C5 /* Constant */,
 				F59C879728D00B17000443C5 /* Service */,
 				F59C878628CF86A8000443C5 /* Model */,
 				F521182E28CF84EB00A32CD9 /* Assets.xcassets */,
@@ -110,6 +109,7 @@
 				F59C878B28D00594000443C5 /* CatImagesViewController.swift */,
 				F59C878D28D005A0000443C5 /* FavoriteViewController.swift */,
 				F59C878F28D005AF000443C5 /* MyUploadViewController.swift */,
+				F59C87AA28D07714000443C5 /* SelectImageViewController.swift */,
 				F59C879A28D00D14000443C5 /* Cell */,
 			);
 			path = View;
@@ -147,14 +147,6 @@
 				F59C879B28D00D25000443C5 /* ImagesCollectionViewCell.swift */,
 			);
 			path = Cell;
-			sourceTree = "<group>";
-		};
-		F59C879D28D03EB3000443C5 /* Constant */ = {
-			isa = PBXGroup;
-			children = (
-				F59C879E28D03ECE000443C5 /* Constant.swift */,
-			);
-			path = Constant;
 			sourceTree = "<group>";
 		};
 		F7D27CE2A2F28EDCFFB7316C /* Pods */ = {
@@ -289,7 +281,7 @@
 				F59C879028D005AF000443C5 /* MyUploadViewController.swift in Sources */,
 				F521182828CF84E900A32CD9 /* SceneDelegate.swift in Sources */,
 				F59C879228D005BD000443C5 /* CatImagesViewModel.swift in Sources */,
-				F59C879F28D03ECE000443C5 /* Constant.swift in Sources */,
+				F59C87AB28D07714000443C5 /* SelectImageViewController.swift in Sources */,
 				F59C878E28D005A0000443C5 /* FavoriteViewController.swift in Sources */,
 				F59C879C28D00D25000443C5 /* ImagesCollectionViewCell.swift in Sources */,
 				F59C878C28D00594000443C5 /* CatImagesViewController.swift in Sources */,

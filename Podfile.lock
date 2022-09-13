@@ -1,24 +1,28 @@
 PODS:
   - Alamofire (5.6.2)
+  - Gallery (2.4.0)
   - Loaf (0.7.0)
   - ProgressHUD (13.6)
 
 DEPENDENCIES:
   - Alamofire
+  - Gallery
   - Loaf
   - ProgressHUD
 
 SPEC REPOS:
   trunk:
     - Alamofire
+    - Gallery
     - Loaf
     - ProgressHUD
 
 SPEC CHECKSUMS:
   Alamofire: d368e1ff8a298e6dde360e35a3e68e6c610e7204
+  Gallery: b7fc1aeb68a39ad6d2c423574750196bf9b25e5c
   Loaf: d69937cd00649f3fa260beb8b7aef0a1feb861ef
   ProgressHUD: 4bdaa0d2ddf676b23324b199f9facffb5c3a1620
 
-PODFILE CHECKSUM: f4c50101d7bfa70e661fbe1e3da5c4f169dc20fc
+PODFILE CHECKSUM: 0473f1d4223d6958a295fb26d9b79e1578754d82
 
 COCOAPODS: 1.11.2
