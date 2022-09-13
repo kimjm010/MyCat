@@ -9,7 +9,7 @@ pod 'Alamofire'
 pod 'ProgressHUD'
 pod 'Loaf'
 pod 'Gallery'
-
+pod 'Kingfisher', '~> 7.0'
 
   # Pods for MyCat
 

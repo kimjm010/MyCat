@@ -36,13 +36,19 @@ class SelectImageViewController: UIViewController {
     private func createBarButton() {
         let uploadBarButton = UIBarButtonItem(title: "Upload", style: .plain, target: self, action: #selector(uploadCatImage))
         let imageSelectBarButton = UIBarButtonItem(title: "Image", style: .plain, target: self, action: #selector(selectImage))
-//        let closeButton = UIBarButtonItem(title: <#T##String?#>, style: <#T##UIBarButtonItem.Style#>, target: <#T##Any?#>, action: <#T##Selector?#>)
+        let closeButton = UIBarButtonItem(title: "Close", style: .done, target: self, action: #selector(closeVC))
         navigationItem.rightBarButtonItems = [uploadBarButton, imageSelectBarButton]
+        navigationItem.leftBarButtonItem = closeButton
+    }
+    
+    @objc
+    private func closeVC() {
+        dismiss(animated: true, completion: nil)
     }
     
     
     @objc
-    func uploadCatImage() {
+    private func uploadCatImage() {
         print(#function)
         // TODO: Image 업로드 기능 구현하기
         guard let imageData = selectedImage?.pngData() else { return }
@@ -54,7 +60,7 @@ class SelectImageViewController: UIViewController {
     }
     
     @objc
-    func selectImage() {
+    private func selectImage() {
         actionAttach()
     }
     
