@@ -7,6 +7,8 @@
 
 import UIKit
 import Alamofire
+import Kingfisher
+
 
 class CatImagesViewController: UIViewController {
     
@@ -42,7 +44,6 @@ class CatImagesViewController: UIViewController {
     /// - Parameter sender: CatImagesViewController
     private func pullToRefresh(_ sender: Any) {
         getRandomPic(page: 1)
-        catList.removeAll(keepingCapacity: true)
         // TODO: Refresh하면 catList 초기화 하기
     }
     
@@ -70,6 +71,12 @@ class CatImagesViewController: UIViewController {
                 let res = try JSONDecoder().decode([Cat].self, from: data)
                 self.catList.append(contentsOf: res)
                 
+                for i in 0..<self.catList.count {
+                    guard let urlStr = self.catList[i].url else { return }
+                    let url = URL(string: urlStr)
+                    
+                }
+                
                 print(self.catList.count)
                 
                     self.imageCollectionView.reloadData()
@@ -96,12 +103,9 @@ extension CatImagesViewController: UICollectionViewDataSource {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ImagesCollectionViewCell", for: indexPath) as! ImagesCollectionViewCell
         
         let target = catList[indexPath.item]
-        let data = NSData(contentsOf: NSURL(string: target.url!)! as URL)
-        var image: UIImage?
-        if (data != nil) {
-            image = UIImage(data: data! as Data)
-            cell.catImageView.image = image
-        }
+        guard let urlStr = target.url else { return UICollectionViewCell() }
+        let url = URL(string: urlStr)
+        cell.catImageView.kf.setImage(with: url)
         
         return cell
     }
@@ -136,9 +140,8 @@ extension CatImagesViewController: UICollectionViewDelegateFlowLayout {
 extension CatImagesViewController: UICollectionViewDataSourcePrefetching {
     
     func collectionView(_ collectionView: UICollectionView, prefetchItemsAt indexPaths: [IndexPath]) {
-        print(#function)
         
-        guard indexPaths.contains(where: { $0.row >= self.catList.count - 10 }) else { return }
+        guard indexPaths.contains(where: { $0.row >= self.catList.count - 5 }) else { return }
         
         getRandomPic(page: page)
     }
