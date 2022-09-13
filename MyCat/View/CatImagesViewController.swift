@@ -72,9 +72,7 @@ class CatImagesViewController: UIViewController {
                 
                 print(self.catList.count)
                 
-                DispatchQueue.main.async {
                     self.imageCollectionView.reloadData()
-                }
                 
             } catch {
                 print(error)

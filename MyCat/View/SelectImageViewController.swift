@@ -21,6 +21,8 @@ class SelectImageViewController: UIViewController {
     
     var gallery: GalleryController!
     
+    var selectedImage: UIImage?
+    
     
     // MARK: - View Life Cycle
     
@@ -34,6 +36,7 @@ class SelectImageViewController: UIViewController {
     private func createBarButton() {
         let uploadBarButton = UIBarButtonItem(title: "Upload", style: .plain, target: self, action: #selector(uploadCatImage))
         let imageSelectBarButton = UIBarButtonItem(title: "Image", style: .plain, target: self, action: #selector(selectImage))
+//        let closeButton = UIBarButtonItem(title: <#T##String?#>, style: <#T##UIBarButtonItem.Style#>, target: <#T##Any?#>, action: <#T##Selector?#>)
         navigationItem.rightBarButtonItems = [uploadBarButton, imageSelectBarButton]
     }
     
@@ -41,7 +44,13 @@ class SelectImageViewController: UIViewController {
     @objc
     func uploadCatImage() {
         print(#function)
-        // TODO: image 업로드하기
+        // TODO: Image 업로드 기능 구현하기
+        guard let imageData = selectedImage?.pngData() else { return }
+        Network.shared.uploadMyCatImage(imageData: imageData) { response in
+            print(#function, response)
+        }
+        
+        dismiss(animated: true, completion: nil)
     }
     
     @objc
@@ -102,6 +111,7 @@ extension SelectImageViewController: GalleryControllerDelegate {
                 guard let self = self else { return }
                 
                 self.imageView.image = image
+                self.selectedImage = image
             }
         }
         
@@ -122,6 +132,4 @@ extension SelectImageViewController: GalleryControllerDelegate {
     func galleryControllerDidCancel(_ controller: GalleryController) {
         controller.dismiss(animated: true, completion: nil)
     }
-    
-    
 }
