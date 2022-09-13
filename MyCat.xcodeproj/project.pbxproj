@@ -7,23 +7,41 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		AEA291666E2A943F085A240A /* Pods_MyCat.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A56E6E8F2EF676152BC5B50 /* Pods_MyCat.framework */; };
 		F521182628CF84E900A32CD9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F521182528CF84E900A32CD9 /* AppDelegate.swift */; };
 		F521182828CF84E900A32CD9 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F521182728CF84E900A32CD9 /* SceneDelegate.swift */; };
-		F521182A28CF84E900A32CD9 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F521182928CF84E900A32CD9 /* ViewController.swift */; };
 		F521182D28CF84E900A32CD9 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F521182B28CF84E900A32CD9 /* Main.storyboard */; };
 		F521182F28CF84EB00A32CD9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F521182E28CF84EB00A32CD9 /* Assets.xcassets */; };
 		F521183228CF84EB00A32CD9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F521183028CF84EB00A32CD9 /* LaunchScreen.storyboard */; };
+		F59C878828CF8F20000443C5 /* CatModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F59C878728CF8F20000443C5 /* CatModel.swift */; };
+		F59C878A28CF8F36000443C5 /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F59C878928CF8F36000443C5 /* UserModel.swift */; };
+		F59C878C28D00594000443C5 /* CatImagesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F59C878B28D00594000443C5 /* CatImagesViewController.swift */; };
+		F59C878E28D005A0000443C5 /* FavoriteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F59C878D28D005A0000443C5 /* FavoriteViewController.swift */; };
+		F59C879028D005AF000443C5 /* MyUploadViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F59C878F28D005AF000443C5 /* MyUploadViewController.swift */; };
+		F59C879228D005BD000443C5 /* CatImagesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F59C879128D005BD000443C5 /* CatImagesViewModel.swift */; };
+		F59C879428D005C5000443C5 /* FavoriteViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F59C879328D005C5000443C5 /* FavoriteViewModel.swift */; };
+		F59C879628D005D1000443C5 /* MyUploadViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F59C879528D005D1000443C5 /* MyUploadViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0A56E6E8F2EF676152BC5B50 /* Pods_MyCat.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MyCat.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		3C4E18113F9388D2A3EC843D /* Pods-MyCat.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyCat.debug.xcconfig"; path = "Target Support Files/Pods-MyCat/Pods-MyCat.debug.xcconfig"; sourceTree = "<group>"; };
+		91DF7EC202E3C0386116A37C /* Pods-MyCat.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyCat.release.xcconfig"; path = "Target Support Files/Pods-MyCat/Pods-MyCat.release.xcconfig"; sourceTree = "<group>"; };
 		F521182228CF84E900A32CD9 /* MyCat.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MyCat.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F521182528CF84E900A32CD9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F521182728CF84E900A32CD9 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		F521182928CF84E900A32CD9 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		F521182C28CF84E900A32CD9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		F521182E28CF84EB00A32CD9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		F521183128CF84EB00A32CD9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		F521183328CF84EB00A32CD9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F59C878728CF8F20000443C5 /* CatModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CatModel.swift; sourceTree = "<group>"; };
+		F59C878928CF8F36000443C5 /* UserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
+		F59C878B28D00594000443C5 /* CatImagesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CatImagesViewController.swift; sourceTree = "<group>"; };
+		F59C878D28D005A0000443C5 /* FavoriteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteViewController.swift; sourceTree = "<group>"; };
+		F59C878F28D005AF000443C5 /* MyUploadViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyUploadViewController.swift; sourceTree = "<group>"; };
+		F59C879128D005BD000443C5 /* CatImagesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CatImagesViewModel.swift; sourceTree = "<group>"; };
+		F59C879328D005C5000443C5 /* FavoriteViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteViewModel.swift; sourceTree = "<group>"; };
+		F59C879528D005D1000443C5 /* MyUploadViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyUploadViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -31,17 +49,28 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AEA291666E2A943F085A240A /* Pods_MyCat.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		B99C4548051A6CED1ABB714C /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				0A56E6E8F2EF676152BC5B50 /* Pods_MyCat.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		F521181928CF84E900A32CD9 = {
 			isa = PBXGroup;
 			children = (
 				F521182428CF84E900A32CD9 /* MyCat */,
 				F521182328CF84E900A32CD9 /* Products */,
+				F7D27CE2A2F28EDCFFB7316C /* Pods */,
+				B99C4548051A6CED1ABB714C /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -58,13 +87,53 @@
 			children = (
 				F521182528CF84E900A32CD9 /* AppDelegate.swift */,
 				F521182728CF84E900A32CD9 /* SceneDelegate.swift */,
-				F521182928CF84E900A32CD9 /* ViewController.swift */,
 				F521182B28CF84E900A32CD9 /* Main.storyboard */,
-				F521182E28CF84EB00A32CD9 /* Assets.xcassets */,
 				F521183028CF84EB00A32CD9 /* LaunchScreen.storyboard */,
+				F59C878528CF86A4000443C5 /* ViewModel */,
+				F59C878428CF86A1000443C5 /* View */,
+				F59C878628CF86A8000443C5 /* Model */,
+				F521182E28CF84EB00A32CD9 /* Assets.xcassets */,
 				F521183328CF84EB00A32CD9 /* Info.plist */,
 			);
 			path = MyCat;
+			sourceTree = "<group>";
+		};
+		F59C878428CF86A1000443C5 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				F59C878B28D00594000443C5 /* CatImagesViewController.swift */,
+				F59C878D28D005A0000443C5 /* FavoriteViewController.swift */,
+				F59C878F28D005AF000443C5 /* MyUploadViewController.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		F59C878528CF86A4000443C5 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				F59C879128D005BD000443C5 /* CatImagesViewModel.swift */,
+				F59C879328D005C5000443C5 /* FavoriteViewModel.swift */,
+				F59C879528D005D1000443C5 /* MyUploadViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		F59C878628CF86A8000443C5 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				F59C878728CF8F20000443C5 /* CatModel.swift */,
+				F59C878928CF8F36000443C5 /* UserModel.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		F7D27CE2A2F28EDCFFB7316C /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				3C4E18113F9388D2A3EC843D /* Pods-MyCat.debug.xcconfig */,
+				91DF7EC202E3C0386116A37C /* Pods-MyCat.release.xcconfig */,
+			);
+			path = Pods;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -74,9 +143,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = F521183628CF84EB00A32CD9 /* Build configuration list for PBXNativeTarget "MyCat" */;
 			buildPhases = (
+				28AA2C650FC1A2FB67D76CDF /* [CP] Check Pods Manifest.lock */,
 				F521181E28CF84E900A32CD9 /* Sources */,
 				F521181F28CF84E900A32CD9 /* Frameworks */,
 				F521182028CF84E900A32CD9 /* Resources */,
+				04C7FE0EAA50F62A71C67D35 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -133,14 +204,63 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		04C7FE0EAA50F62A71C67D35 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-MyCat/Pods-MyCat-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-MyCat/Pods-MyCat-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-MyCat/Pods-MyCat-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		28AA2C650FC1A2FB67D76CDF /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-MyCat-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		F521181E28CF84E900A32CD9 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F521182A28CF84E900A32CD9 /* ViewController.swift in Sources */,
+				F59C879428D005C5000443C5 /* FavoriteViewModel.swift in Sources */,
+				F59C878828CF8F20000443C5 /* CatModel.swift in Sources */,
 				F521182628CF84E900A32CD9 /* AppDelegate.swift in Sources */,
+				F59C879628D005D1000443C5 /* MyUploadViewModel.swift in Sources */,
+				F59C878A28CF8F36000443C5 /* UserModel.swift in Sources */,
+				F59C879028D005AF000443C5 /* MyUploadViewController.swift in Sources */,
 				F521182828CF84E900A32CD9 /* SceneDelegate.swift in Sources */,
+				F59C879228D005BD000443C5 /* CatImagesViewModel.swift in Sources */,
+				F59C878E28D005A0000443C5 /* FavoriteViewController.swift in Sources */,
+				F59C878C28D00594000443C5 /* CatImagesViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -282,6 +402,7 @@
 		};
 		F521183728CF84EB00A32CD9 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 3C4E18113F9388D2A3EC843D /* Pods-MyCat.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -295,6 +416,7 @@
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -310,6 +432,7 @@
 		};
 		F521183828CF84EB00A32CD9 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 91DF7EC202E3C0386116A37C /* Pods-MyCat.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -323,6 +446,7 @@
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
