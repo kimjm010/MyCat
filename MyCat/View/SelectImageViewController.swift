@@ -41,6 +41,7 @@ class SelectImageViewController: UIViewController {
         navigationItem.leftBarButtonItem = closeButton
     }
     
+    
     @objc
     private func closeVC() {
         dismiss(animated: true, completion: nil)
@@ -49,14 +50,16 @@ class SelectImageViewController: UIViewController {
     
     @objc
     private func uploadCatImage() {
-        print(#function)
-        // TODO: Image 업로드 기능 구현하기
         guard let imageData = selectedImage?.pngData() else { return }
         Network.shared.uploadMyCatImage(imageData: imageData) { response in
             print(#function, response)
         }
         
-        dismiss(animated: true, completion: nil)
+        dismiss(animated: true) {
+            Network.shared.fetchMyUploadImages { result in
+                print(result)
+            }
+        }
     }
     
     @objc
