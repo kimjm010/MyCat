@@ -8,6 +8,7 @@
 import UIKit
 import Gallery
 import Alamofire
+import ProgressHUD
 
 
 class SelectImageViewController: UIViewController {
@@ -52,14 +53,11 @@ class SelectImageViewController: UIViewController {
     private func uploadCatImage() {
         guard let imageData = selectedImage?.pngData() else { return }
         Network.shared.uploadMyCatImage(imageData: imageData) { response in
+            ProgressHUD.showSuccess("고양이 이미지가 정상적으로 등록되었습니다 :)")
             print(#function, response)
         }
         
-        dismiss(animated: true) {
-            Network.shared.fetchMyUploadImages { result in
-                print(result)
-            }
-        }
+        dismiss(animated: true)
     }
     
     @objc

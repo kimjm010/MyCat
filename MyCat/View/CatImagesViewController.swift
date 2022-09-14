@@ -77,7 +77,9 @@ class CatImagesViewController: UIViewController {
     private func getRandomPic(page: Int) {
         self.page += 1
         
-        Network.shared.getRandomCatImages(page: self.page) { data in
+        Network.shared.getRandomCatImages(page: self.page) { [weak self] (data) in
+            guard let self = self else { return }
+            
             do {
                 let res = try JSONDecoder().decode([Cat].self, from: data)
                 self.catList.append(contentsOf: res)
@@ -111,6 +113,23 @@ extension CatImagesViewController: UICollectionViewDataSource {
         cell.catImageView.kf.setImage(with: url)
         
         return cell
+    }
+}
+
+
+
+
+extension CatImagesViewController: UICollectionViewDelegate {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
+        alert(title: "알림", message: "즐겨찾기에 추가하시겠습니까?") { [weak self] _ in
+            guard let self = self else { return }
+            
+            let target = self.catList[indexPath.item]
+            guard let catId = target.id else { return }
+            Network.shared.postFavoriteImage(imageId: catId) { _ in }
+            ProgressHUD.showSuccess("즐겨찾기 추가 성공")
+        }
     }
 }
 

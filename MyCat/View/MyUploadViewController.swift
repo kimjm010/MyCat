@@ -21,39 +21,35 @@ class MyUploadViewController: UIViewController {
     
     var selectedCat: Cat?
     
-    
-    // MARK: - IBActions
-    
-    @IBAction func deleteImage(_ sender: Any) {
-        
-    }
-    
 
     // MARK: - View Life Cycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        getUPloadedImages()
     }
     
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
+        getUPloadedImages()
     }
     
     
     // MARK: - Get Upload Images
     
     private func getUPloadedImages() {
-        Network.shared.fetchMyUploadImages { [weak self] data in
+        Network.shared.fetchMyUploadImages { [weak self] (data) in
             guard let self = self else { return }
             
             do {
                 let result = try JSONDecoder().decode([Cat].self, from: data)
                 self.catList.append(contentsOf: result)
+                
+                #if DEBUG
                 print(self.catList.count)
+                #endif
+                
                 self.collectionView.reloadData()
             } catch {
                 #if DEBUG
@@ -95,16 +91,16 @@ extension MyUploadViewController: UICollectionViewDataSource {
 
 extension MyUploadViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        #warning("Todo: - 이미지 삭제 기능 확인하기")
         let target = catList[indexPath.item]
-        print(target)
         alert(title: "알림", message: "해당 이미지를 삭제하시겠습니까?") { [weak self] _ in
             guard let self = self else { return }
             guard let catId = target.id else { return }
 
             Network.shared.deleteMyCatImage(imageId: catId) { response in
-                print(response, self.catList.count, "^^")
                 DispatchQueue.main.async {
                     self.collectionView.reloadData()
+                    print(response, self.catList.count, "^^")
                 }
             }
         }
