@@ -19,23 +19,24 @@ class Network {
         return "https://api.thecatapi.com/"
     }
     
-    static var session: Session = {
-        let config = URLSessionConfiguration.default
-        config.httpAdditionalHeaders = [:]
-        config.httpAdditionalHeaders?["Accept"] = "application/json"
-        return Session(configuration: config)
-    }()
-    
     
     func getRandomCatImages(page: Int, completion: @escaping (_ result: Data) -> Void) {
-        let url = "v1/images/search?page=\(page)&api_key=\(Network.shared.apiKey)&format=json&limit=20"
-        Network.session.request(baseURL + url, method: .get).responseDecodable(of: [Cat].self) { (response) in
+        let url = "v1/images/search?page=\(page)&limit=20"
+        let headers: HTTPHeaders = [
+            "Content-Type": "application/json",
+            "x-api-key": Network.shared.apiKey
+        ]
+        
+        AF.request(baseURL + url, method: .get, headers: headers)
+            .responseDecodable(of: [Cat].self) { (response) in
             switch response.result {
             case .success(_):
                 completion(response.data!)
             case .failure(let error):
+                #if DEBUG
                 print(error)
                 print(response.data!)
+                #endif
             }
         }
     }
@@ -63,5 +64,51 @@ class Network {
                 print(response.data!)
             }
         }
+    }
+    
+    
+    func fetchMyUploadImages(completion: @escaping (_ result: Data) -> Void) {
+        let url = "v1/images/"
+        let headers: HTTPHeaders = [
+            "Content-Type": "application/json",
+            "x-api-key": Network.shared.apiKey
+        ]
+        
+        AF.request(baseURL + url, method: .get, headers: headers).responseDecodable(of: [Cat].self) { (response) in
+            switch response.result {
+            case .success(_):
+                completion(response.data!)
+            case .failure(let error):
+                #if DEBUG
+                print(error)
+                print(response.data!)
+                #endif
+            }
+        }
+    }
+    
+    
+    func deleteMyCatImage(imageId: String, completion: @escaping (_ result: Data) -> Void) {
+        let url = "v1/images/"
+        var resultUrl: String {
+            return url + "\(imageId)"
+        }
+        let headers: HTTPHeaders = [
+            "Content-Type": "application/json",
+            "x-api-key": Network.shared.apiKey
+        ]
+        
+        AF.request(baseURL + resultUrl, method: .delete, headers: headers)
+            .responseDecodable(of: Cat.self) { (response) in
+                switch response.result {
+                case .success(_):
+                    print(#function)
+                    completion(response.data!)
+                case .failure(let error):
+                    #if DEBUG
+                    print(error)
+                    #endif
+                }
+            }
     }
 }

@@ -8,6 +8,7 @@
 import UIKit
 import Alamofire
 import Kingfisher
+import ProgressHUD
 
 
 class CatImagesViewController: UIViewController {
@@ -24,7 +25,17 @@ class CatImagesViewController: UIViewController {
     var page = 0
     
     private var refreshControl = UIRefreshControl()
-
+    
+    
+    // MARK: - IBActions
+    
+    @IBAction func selectFavorite(_ sender: Any) {
+        print(#function)
+        alert(title: "알림", message: "즐겨찾기에 추가하시겠습니까?") { _ in
+            #warning("Todo: - 즐겨찾기에 해당 Cat 추가하기")
+        }
+    }
+    
     
     // MARK: - View Life Cycle
     
@@ -37,6 +48,7 @@ class CatImagesViewController: UIViewController {
       getRandomPic(page: page)
     }
     
+    
     // MARK: - Refresh Collection View
     
     @objc
@@ -44,7 +56,7 @@ class CatImagesViewController: UIViewController {
     /// - Parameter sender: CatImagesViewController
     private func pullToRefresh(_ sender: Any) {
         getRandomPic(page: 1)
-        // TODO: Refresh하면 catList 초기화 하기
+        #warning("Todo: - 새로고침하면 새로운 데이터를 불러올 것")
     }
     
     
@@ -63,26 +75,17 @@ class CatImagesViewController: UIViewController {
     // MARK: - Fetch Cat Image
     
     private func getRandomPic(page: Int) {
-        
         self.page += 1
         
         Network.shared.getRandomCatImages(page: self.page) { data in
             do {
                 let res = try JSONDecoder().decode([Cat].self, from: data)
                 self.catList.append(contentsOf: res)
-                
-                for i in 0..<self.catList.count {
-                    guard let urlStr = self.catList[i].url else { return }
-                    let url = URL(string: urlStr)
-                    
-                }
-                
-                print(self.catList.count)
-                
-                    self.imageCollectionView.reloadData()
-                
+                self.imageCollectionView.reloadData()
             } catch {
+                #if DEBUG
                 print(error)
+                #endif
             }
         }
     }
@@ -114,15 +117,8 @@ extension CatImagesViewController: UICollectionViewDataSource {
 
 
 
-// MARK: - UICollectionView Delegate
-extension CatImagesViewController: UICollectionViewDelegate {
-    
-}
-
-
-
-
 // MARK: - UICollectionView Delegate FlowLayout
+
 extension CatImagesViewController: UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
@@ -137,14 +133,15 @@ extension CatImagesViewController: UICollectionViewDelegateFlowLayout {
 
 
 
+
+// MARK: - UICollectionView DataSource Prefetching
+
 extension CatImagesViewController: UICollectionViewDataSourcePrefetching {
     
     func collectionView(_ collectionView: UICollectionView, prefetchItemsAt indexPaths: [IndexPath]) {
         
-        guard indexPaths.contains(where: { $0.row >= self.catList.count - 5 }) else { return }
+        guard indexPaths.contains(where: { $0.row >= self.catList.count - 8 }) else { return }
         
         getRandomPic(page: page)
     }
-    
-    
 }
