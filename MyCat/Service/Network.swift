@@ -36,7 +36,7 @@ class Network {
                 completion(response.data!)
             case .failure(let error):
                 #if DEBUG
-                print(error)
+                print(#function, #file, #line, "\(error)")
                 #endif
             }
         }
@@ -63,8 +63,9 @@ class Network {
             case .success(_):
                 completion(response.data!)
             case .failure(let error):
-                print(error)
-                print(response.data!)
+                #if DEBUG
+                print(#function, #file, #line, "\(error)")
+                #endif
             }
         }
     }
@@ -85,7 +86,7 @@ class Network {
                 completion(response.data!)
             case .failure(let error):
                 #if DEBUG
-                print(error)
+                print(#function, #file, #line, "\(error)")
                 #endif
             }
         }
@@ -112,7 +113,7 @@ class Network {
                     completion(response.data!)
                 case .failure(let error):
                     #if DEBUG
-                    print(error)
+                    print(#function, #file, #line, "\(error)")
                     #endif
                 }
             }
@@ -135,7 +136,7 @@ class Network {
                     completion(response.data!)
                 case .failure(let error):
                     #if DEBUG
-                    print(error, "여기")
+                    print(#function, #file, #line, "\(error)")
                     #endif
                 }
             })
@@ -144,49 +145,46 @@ class Network {
     
     // MARK: - Delete Favorite Image
     
-    func deleteFavoriteImage(imageId: Int, completion: @escaping (_ result: Data) -> Void) {
-        let urlStr = "v1/images/\(imageId)"
-        var url = URL(string: baseURL + urlStr)!
-        url.appendPathComponent("\(imageId)")
+    func deleteFavoriteImage(imageId: Int, completion: @escaping () -> Void) {
+        let url = "v1/images/\(imageId)"
         
         let headers: HTTPHeaders = [
             "Content-Type": "application/json",
             "x-api-key": Network.shared.apiKey
         ]
         
-        AF.request(url, method: .delete, headers: headers)
-            .responseData { (response) in
+        
+        AF.request(baseURL + url, method: .delete, headers: headers)
+            .responseData(completionHandler: { (response) in
                 switch response.result {
-                case .success(let data):
-                    print(#function)
-                    print(data)
+                case .success(_):
+                    completion()
+                    print(#function, #file, #line, "\(response.debugDescription)")
                 case .failure(let error):
                     #if DEBUG
                     print(error)
                     #endif
                 }
-            }
+            })
     }
     
     
-    // MARK: - Delete
+    // MARK: - Delete Cat Image
     
-    func deleteMyCatImage(imageId: String, completion: @escaping (_ result: Data) -> Void) {
-        let urlStr = "v1/images/\(imageId)"
-        var url = URL(string: baseURL + urlStr)!
-        url.appendPathComponent(imageId)
+    func deleteMyCatImage(imageId: String, completion: @escaping () -> Void) {
+        let url = "v1/images/\(imageId)"
         
         let headers: HTTPHeaders = [
             "Content-Type": "application/json",
             "x-api-key": Network.shared.apiKey
         ]
         
-        AF.request(url, method: .delete, headers: headers)
+        AF.request(baseURL + url, method: .delete, headers: headers)
             .responseData(completionHandler: { (response) in
                 switch response.result {
-                case .success(let data):
-                    print(#function)
-                    print(data)
+                case .success(_):
+                    completion()
+                    print(#function, #file, #line, "\(response.debugDescription)")
                 case .failure(let error):
                     #if DEBUG
                     print(error)

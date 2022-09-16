@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import ProgressHUD
 
 
 class MyUploadViewController: UIViewController {
@@ -18,8 +19,6 @@ class MyUploadViewController: UIViewController {
     // MARK: - Vars
     
     var catList = [Cat]()
-    
-    var selectedCat: Cat?
     
 
     // MARK: - View Life Cycle
@@ -45,11 +44,6 @@ class MyUploadViewController: UIViewController {
             do {
                 let result = try JSONDecoder().decode([Cat].self, from: data)
                 self.catList.append(contentsOf: result)
-                
-                #if DEBUG
-                print(self.catList.count)
-                #endif
-                
                 self.collectionView.reloadData()
             } catch {
                 #if DEBUG
@@ -91,18 +85,19 @@ extension MyUploadViewController: UICollectionViewDataSource {
 
 extension MyUploadViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        #warning("Todo: - 이미지 삭제 기능 확인하기")
         let target = catList[indexPath.item]
+    
         alert(title: "알림", message: "해당 이미지를 삭제하시겠습니까?") { [weak self] _ in
             guard let self = self else { return }
             guard let catId = target.id else { return }
-
-            Network.shared.deleteMyCatImage(imageId: catId) { response in
-                DispatchQueue.main.async {
-                    self.collectionView.reloadData()
-                    print(response, self.catList.count, "^^")
-                }
+            
+            Network.shared.deleteMyCatImage(imageId: catId) {
+                print(#function, #file, #line, "삭제했나???!!!")
+                self.catList.remove(at: indexPath.item)
+                self.collectionView.deleteItems(at: [indexPath])
             }
+            
+            ProgressHUD.showSuccess("이미지가 삭제되었습니다.")
         }
     }
 }

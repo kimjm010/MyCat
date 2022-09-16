@@ -221,33 +221,17 @@
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="2JY-Pm-Qpq">
                                                     <rect key="frame" x="0.0" y="0.0" width="168" height="173"/>
                                                 </imageView>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3Yh-ls-69X">
-                                                    <rect key="frame" x="133" y="138" width="30" height="30"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="width" constant="30" id="SBQ-Zm-R4A"/>
-                                                        <constraint firstAttribute="height" constant="30" id="jxC-Wk-5Jp"/>
-                                                    </constraints>
-                                                    <color key="tintColor" systemColor="systemYellowColor"/>
-                                                    <state key="normal" title="Button"/>
-                                                    <buttonConfiguration key="configuration" style="plain" image="star.fill" catalog="system"/>
-                                                    <connections>
-                                                        <action selector="selectFavorite:" destination="tPE-3R-WQz" eventType="touchUpInside" id="9Ex-Ao-sSO"/>
-                                                    </connections>
-                                                </button>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstAttribute="bottom" secondItem="2JY-Pm-Qpq" secondAttribute="bottom" id="0HS-pI-pT7"/>
                                                 <constraint firstItem="2JY-Pm-Qpq" firstAttribute="leading" secondItem="Xyn-Kg-pHP" secondAttribute="leading" id="1e4-OZ-Cpt"/>
                                                 <constraint firstAttribute="trailing" secondItem="2JY-Pm-Qpq" secondAttribute="trailing" id="4qN-Wd-srE"/>
-                                                <constraint firstAttribute="trailing" secondItem="3Yh-ls-69X" secondAttribute="trailing" constant="5" id="cBs-Ne-gYX"/>
                                                 <constraint firstItem="2JY-Pm-Qpq" firstAttribute="top" secondItem="Xyn-Kg-pHP" secondAttribute="top" id="dXe-aR-Yob"/>
-                                                <constraint firstAttribute="bottom" secondItem="3Yh-ls-69X" secondAttribute="bottom" constant="5" id="uNI-D8-ivs"/>
                                             </constraints>
                                         </collectionViewCellContentView>
                                         <size key="customSize" width="168" height="173"/>
                                         <connections>
                                             <outlet property="catImageView" destination="2JY-Pm-Qpq" id="Gcq-Yi-HNG"/>
-                                            <outlet property="favoriteButton" destination="3Yh-ls-69X" id="uXv-ns-hLo"/>
                                         </connections>
                                     </collectionViewCell>
                                 </cells>
@@ -320,16 +304,12 @@
     <resources>
         <image name="favorite" width="32" height="32"/>
         <image name="mainCat" width="32" height="32"/>
-        <image name="star.fill" catalog="system" width="128" height="116"/>
         <image name="upload" width="32" height="32"/>
         <systemColor name="labelColor">
             <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
-        <systemColor name="systemYellowColor">
-            <color red="1" green="0.80000000000000004" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

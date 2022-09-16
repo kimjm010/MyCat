@@ -18,7 +18,7 @@ class FavoriteViewController: UIViewController {
     
     // MARK: - Vars
     
-    var catList = [FavoriteCat]()
+    var favCatList = [FavoriteCat]()
     
 
     // MARK: - View Life Cycle
@@ -41,12 +41,11 @@ class FavoriteViewController: UIViewController {
             
             do {
                 let result = try JSONDecoder().decode([FavoriteCat].self, from: data)
-                self.catList = result
-                print(self.catList.count)
+                self.favCatList = result
                 self.collectionView.reloadData()
             } catch {
                 #if DEBUG
-                print(error, "^^")
+                print(error)
                 #endif
             }
         }
@@ -61,14 +60,14 @@ class FavoriteViewController: UIViewController {
 extension FavoriteViewController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return catList.count
+        return favCatList.count
     }
     
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "FavoriteCollectionViewCell", for: indexPath) as! FavoriteCollectionViewCell
         
-        let target = catList[indexPath.item]
+        let target = favCatList[indexPath.item]
         guard let urlStr = target.image.url else { return UICollectionViewCell() }
         let url = URL(string: urlStr)
         cell.imageView.kf.setImage(with: url)
@@ -87,22 +86,18 @@ extension FavoriteViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
         alert(title: "알림", message: "해당 이미지를 삭제하시겠습니까?") { [weak self] _ in
-            #warning("Todo: - 삭제기능 구현")
             guard let self = self else { return }
-            print(#function)
-            
-            let target = self.catList[indexPath.item]
+            let target = self.favCatList[indexPath.item]
             guard let catId = target.id else { return }
-            let strCatId = String(catId)
             
-            
-            Network.shared.deleteMyCatImage(imageId: strCatId) {  (data) in
-                self.collectionView.reloadData()
+            Network.shared.deleteFavoriteImage(imageId: catId) {
+                print(#function, #file, #line, "즐겨찾기 이미지 삭제 되었나요?")
+                self.favCatList.remove(at: indexPath.item)
+                self.collectionView.deleteItems(at: [indexPath])
             }
             
             ProgressHUD.showSuccess("이미지 삭제 완료")
         }
-        
     }
 }
 
