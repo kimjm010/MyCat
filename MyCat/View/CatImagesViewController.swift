@@ -27,16 +27,6 @@ class CatImagesViewController: UIViewController {
     private var refreshControl = UIRefreshControl()
     
     
-    // MARK: - IBActions
-    
-    @IBAction func selectFavorite(_ sender: Any) {
-        print(#function)
-        alert(title: "알림", message: "즐겨찾기에 추가하시겠습니까?") { _ in
-            #warning("Todo: - 즐겨찾기에 해당 Cat 추가하기")
-        }
-    }
-    
-    
     // MARK: - View Life Cycle
     
     override func viewDidLoad() {
@@ -110,8 +100,9 @@ extension CatImagesViewController: UICollectionViewDataSource {
         let target = catList[indexPath.item]
         guard let urlStr = target.url else { return UICollectionViewCell() }
         let url = URL(string: urlStr)
-        cell.catImageView.kf.setImage(with: url)
-        
+        cell.catImageView.kf.setImage(with: url,
+                                      placeholder: UIImage(named: "zoo"),
+                                      options: [.transition(.fade(0.3))])
         return cell
     }
 }

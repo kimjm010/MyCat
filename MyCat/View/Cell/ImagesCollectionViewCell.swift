@@ -14,10 +14,4 @@ class ImagesCollectionViewCell: UICollectionViewCell {
     // MARK: - IBOutlets
     
     @IBOutlet weak var catImageView: UIImageView!
-    @IBOutlet weak var favoriteButton: UIButton!
-    
-    
-    override func awakeFromNib() {
-        favoriteButton.setTitle("", for: .normal)
-    }
 }
