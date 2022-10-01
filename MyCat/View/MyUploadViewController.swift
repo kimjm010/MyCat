@@ -25,13 +25,14 @@ class MyUploadViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        getUPloadedImages()
     }
     
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        getUPloadedImages()
+        
+        collectionView.reloadData()
     }
     
     
@@ -43,12 +44,10 @@ class MyUploadViewController: UIViewController {
             
             do {
                 let result = try JSONDecoder().decode([Cat].self, from: data)
-                self.catList.append(contentsOf: result)
+                self.catList = result
                 self.collectionView.reloadData()
             } catch {
-                #if DEBUG
-                print(error)
-                #endif
+                ProgressHUD.showFailed("Fail to fetch My Uploaded Images. Please try again later.")
             }
         }
     }

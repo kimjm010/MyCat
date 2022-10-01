@@ -13,6 +13,7 @@
 		F521182D28CF84E900A32CD9 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F521182B28CF84E900A32CD9 /* Main.storyboard */; };
 		F521182F28CF84EB00A32CD9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F521182E28CF84EB00A32CD9 /* Assets.xcassets */; };
 		F521183228CF84EB00A32CD9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F521183028CF84EB00A32CD9 /* LaunchScreen.storyboard */; };
+		F555656428E71FC400C81339 /* NSNotificationName+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F555656328E71FC400C81339 /* NSNotificationName+Extension.swift */; };
 		F59C878828CF8F20000443C5 /* Cat.swift in Sources */ = {isa = PBXBuildFile; fileRef = F59C878728CF8F20000443C5 /* Cat.swift */; };
 		F59C878C28D00594000443C5 /* CatImagesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F59C878B28D00594000443C5 /* CatImagesViewController.swift */; };
 		F59C878E28D005A0000443C5 /* FavoriteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F59C878D28D005A0000443C5 /* FavoriteViewController.swift */; };
@@ -37,6 +38,7 @@
 		F521182E28CF84EB00A32CD9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		F521183128CF84EB00A32CD9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		F521183328CF84EB00A32CD9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F555656328E71FC400C81339 /* NSNotificationName+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSNotificationName+Extension.swift"; sourceTree = "<group>"; };
 		F59C878728CF8F20000443C5 /* Cat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cat.swift; sourceTree = "<group>"; };
 		F59C878B28D00594000443C5 /* CatImagesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CatImagesViewController.swift; sourceTree = "<group>"; };
 		F59C878D28D005A0000443C5 /* FavoriteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteViewController.swift; sourceTree = "<group>"; };
@@ -148,6 +150,7 @@
 			isa = PBXGroup;
 			children = (
 				F59C87AF28D15D3A000443C5 /* UIVIewController+Alert.swift */,
+				F555656328E71FC400C81339 /* NSNotificationName+Extension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -284,6 +287,7 @@
 				F59C879028D005AF000443C5 /* MyUploadViewController.swift in Sources */,
 				F5EF3D2628D4379C00A66655 /* FavoriteCate.swift in Sources */,
 				F521182828CF84E900A32CD9 /* SceneDelegate.swift in Sources */,
+				F555656428E71FC400C81339 /* NSNotificationName+Extension.swift in Sources */,
 				F59C87AB28D07714000443C5 /* SelectImageViewController.swift in Sources */,
 				F59C878E28D005A0000443C5 /* FavoriteViewController.swift in Sources */,
 				F59C879C28D00D25000443C5 /* ImagesCollectionViewCell.swift in Sources */,

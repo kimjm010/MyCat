@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="ZII-FS-3Eh">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21225" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="ZII-FS-3Eh">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21207"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="collection view cell content view" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--My Favorites-->
+        <!--Favorite-->
         <scene sceneID="a2v-FC-zIL">
             <objects>
                 <viewController storyboardIdentifier="FavoriteVC" id="GSh-Ca-fy7" customClass="FavoriteViewController" customModule="MyCat" customModuleProvider="target" sceneMemberID="viewController">
@@ -62,20 +62,20 @@
                         <viewLayoutGuide key="safeArea" id="5x2-cW-lfQ"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="gxb-qn-3GE" firstAttribute="top" secondItem="WtS-Ag-C92" secondAttribute="top" id="Mo0-xJ-tbQ"/>
-                            <constraint firstAttribute="bottom" secondItem="gxb-qn-3GE" secondAttribute="bottom" id="QZe-fX-iAt"/>
-                            <constraint firstItem="gxb-qn-3GE" firstAttribute="trailing" secondItem="5x2-cW-lfQ" secondAttribute="trailing" id="dIN-QX-rgn"/>
-                            <constraint firstItem="gxb-qn-3GE" firstAttribute="leading" secondItem="5x2-cW-lfQ" secondAttribute="leading" id="e5b-O4-lfh"/>
+                            <constraint firstAttribute="bottom" secondItem="gxb-qn-3GE" secondAttribute="bottom" id="DU7-Xb-FRk"/>
+                            <constraint firstItem="gxb-qn-3GE" firstAttribute="leading" secondItem="5x2-cW-lfQ" secondAttribute="leading" id="EjB-cp-3e6"/>
+                            <constraint firstItem="gxb-qn-3GE" firstAttribute="trailing" secondItem="5x2-cW-lfQ" secondAttribute="trailing" id="Za6-Jb-RwZ"/>
+                            <constraint firstItem="gxb-qn-3GE" firstAttribute="top" secondItem="WtS-Ag-C92" secondAttribute="top" id="efj-Us-gHI"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="My Favorites" image="favorite" id="Bld-zU-gbh"/>
+                    <navigationItem key="navigationItem" title="Favorite" id="Cmd-i2-sit"/>
                     <connections>
                         <outlet property="collectionView" destination="gxb-qn-3GE" id="idS-qm-waR"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xBL-QI-Zyb" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="908.69565217391312" y="370.98214285714283"/>
+            <point key="canvasLocation" x="1818.840579710145" y="370.98214285714283"/>
         </scene>
         <!--Upload-->
         <scene sceneID="j8y-jd-UDN">
@@ -86,7 +86,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="fAi-Bf-6J0">
-                                <rect key="frame" x="0.0" y="88" width="414" height="808"/>
+                                <rect key="frame" x="0.0" y="92" width="414" height="804"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="FoJ-3Y-Inn">
                                     <size key="itemSize" width="234" height="202"/>
@@ -125,33 +125,23 @@
                                     <outlet property="prefetchDataSource" destination="maD-Fh-QR4" id="BQG-Be-wiS"/>
                                 </connections>
                             </collectionView>
-                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ND7-FC-IN0">
-                                <rect key="frame" x="0.0" y="44" width="414" height="44"/>
-                                <items>
-                                    <navigationItem title="Upload" id="az6-UA-YrY">
-                                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="Lbw-5q-yoD">
-                                            <color key="tintColor" systemColor="labelColor"/>
-                                            <connections>
-                                                <segue destination="rbd-o6-GbS" kind="presentation" modalPresentationStyle="fullScreen" id="S2F-9L-mOK"/>
-                                            </connections>
-                                        </barButtonItem>
-                                    </navigationItem>
-                                </items>
-                            </navigationBar>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="3uB-i0-FQw"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="fAi-Bf-6J0" firstAttribute="top" secondItem="ND7-FC-IN0" secondAttribute="bottom" id="CEr-tL-Pbf"/>
-                            <constraint firstAttribute="bottom" secondItem="fAi-Bf-6J0" secondAttribute="bottom" id="DKa-Pw-EPe"/>
-                            <constraint firstItem="fAi-Bf-6J0" firstAttribute="trailing" secondItem="3uB-i0-FQw" secondAttribute="trailing" id="QLQ-TB-l0M"/>
-                            <constraint firstItem="ND7-FC-IN0" firstAttribute="top" secondItem="NoD-hc-9ox" secondAttribute="top" constant="44" id="f5Y-8e-5n1"/>
-                            <constraint firstItem="ND7-FC-IN0" firstAttribute="leading" secondItem="NoD-hc-9ox" secondAttribute="leading" id="k4t-oy-sJ5"/>
-                            <constraint firstItem="fAi-Bf-6J0" firstAttribute="leading" secondItem="3uB-i0-FQw" secondAttribute="leading" id="l90-Ql-jOn"/>
-                            <constraint firstAttribute="trailing" secondItem="ND7-FC-IN0" secondAttribute="trailing" id="vLU-vt-zDT"/>
+                            <constraint firstAttribute="bottom" secondItem="fAi-Bf-6J0" secondAttribute="bottom" id="7f4-LV-Npe"/>
+                            <constraint firstItem="fAi-Bf-6J0" firstAttribute="top" secondItem="3uB-i0-FQw" secondAttribute="top" id="LrR-8a-TGX"/>
+                            <constraint firstItem="fAi-Bf-6J0" firstAttribute="leading" secondItem="3uB-i0-FQw" secondAttribute="leading" id="qCE-1g-hA7"/>
+                            <constraint firstItem="fAi-Bf-6J0" firstAttribute="trailing" secondItem="3uB-i0-FQw" secondAttribute="trailing" id="yu0-k7-MSJ"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Upload" image="upload" id="eig-c7-s47"/>
+                    <navigationItem key="navigationItem" title="Upload" id="raf-hu-STh">
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="KfO-5f-7Ka">
+                            <connections>
+                                <segue destination="rbd-o6-GbS" kind="presentation" modalPresentationStyle="fullScreen" id="yo1-QH-SPf"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <connections>
                         <outlet property="collectionView" destination="fAi-Bf-6J0" id="zkx-xw-Hm8"/>
@@ -159,7 +149,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Fta-zf-373" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="908.69565217391312" y="1031.9196428571429"/>
+            <point key="canvasLocation" x="1818.840579710145" y="1031.9196428571429"/>
         </scene>
         <!--Select Image View Controller-->
         <scene sceneID="vpY-TM-26T">
@@ -170,7 +160,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="1id-3F-NGs">
-                                <rect key="frame" x="20" y="88" width="374" height="200"/>
+                                <rect key="frame" x="20" y="92" width="374" height="200"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="200" id="GxK-S6-mLR"/>
                                 </constraints>
@@ -191,9 +181,9 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4yO-mn-QZB" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2721.739130434783" y="1031.9196428571429"/>
+            <point key="canvasLocation" x="3631.884057971015" y="1031.9196428571429"/>
         </scene>
-        <!--Cat Images-->
+        <!--Random Cat-->
         <scene sceneID="MMo-Mn-36E">
             <objects>
                 <viewController storyboardIdentifier="CatVC" id="tPE-3R-WQz" customClass="CatImagesViewController" customModule="MyCat" customModuleProvider="target" sceneMemberID="viewController">
@@ -251,16 +241,14 @@
                             <constraint firstItem="Gv7-na-xrp" firstAttribute="top" secondItem="AZb-kt-5Yz" secondAttribute="top" id="hpa-G0-AV5"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Cat Images" image="mainCat" id="Jqf-LP-0Br">
-                        <color key="badgeColor" systemColor="labelColor"/>
-                    </tabBarItem>
+                    <navigationItem key="navigationItem" title="Random Cat" id="0t5-US-MwH"/>
                     <connections>
                         <outlet property="imageCollectionView" destination="Gv7-na-xrp" id="MEd-Iy-Xff"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Uim-Vv-ucj" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="908.69565217391312" y="-312.05357142857139"/>
+            <point key="canvasLocation" x="1818.840579710145" y="-312.05357142857139"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="KD3-cw-hp3">
@@ -272,9 +260,9 @@
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </tabBar>
                     <connections>
-                        <segue destination="tPE-3R-WQz" kind="relationship" relationship="viewControllers" id="fIc-KJ-dwW"/>
-                        <segue destination="GSh-Ca-fy7" kind="relationship" relationship="viewControllers" id="7oJ-XX-vyN"/>
-                        <segue destination="maD-Fh-QR4" kind="relationship" relationship="viewControllers" id="Uex-iR-Xyd"/>
+                        <segue destination="V3e-C7-3TZ" kind="relationship" relationship="viewControllers" id="fIc-KJ-dwW"/>
+                        <segue destination="64C-Ue-VME" kind="relationship" relationship="viewControllers" id="7oJ-XX-vyN"/>
+                        <segue destination="SI2-s1-kJ0" kind="relationship" relationship="viewControllers" id="Uex-iR-Xyd"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="YpJ-DZ-DIC" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -288,7 +276,7 @@
                     <toolbarItems/>
                     <navigationItem key="navigationItem" id="WSQ-0T-wQ0"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="asS-rZ-QBH">
-                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <rect key="frame" x="0.0" y="48" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
@@ -298,7 +286,66 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="kgW-Hs-rPu" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1811.594202898551" y="1031.9196428571429"/>
+            <point key="canvasLocation" x="2721.739130434783" y="1031.9196428571429"/>
+        </scene>
+        <!--My Favorites-->
+        <scene sceneID="6ut-kQ-Bu5">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="64C-Ue-VME" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="My Favorites" image="favorite" id="Bld-zU-gbh"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="hkf-ke-2Jw">
+                        <rect key="frame" x="0.0" y="48" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="GSh-Ca-fy7" kind="relationship" relationship="rootViewController" id="KSV-vo-GeB"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="2DG-w5-yrL" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="908.69565217391312" y="370.98214285714283"/>
+        </scene>
+        <!--Upload-->
+        <scene sceneID="Rvf-aV-R8t">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="SI2-s1-kJ0" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Upload" image="upload" id="eig-c7-s47"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="VoK-C0-o4N">
+                        <rect key="frame" x="0.0" y="48" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="maD-Fh-QR4" kind="relationship" relationship="rootViewController" id="1Hu-K3-EA3"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Whe-pl-8fr" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="908.69565217391312" y="1031.9196428571429"/>
+        </scene>
+        <!--Cat Images-->
+        <scene sceneID="qHY-gc-dnl">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="V3e-C7-3TZ" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Cat Images" image="mainCat" id="Jqf-LP-0Br">
+                        <color key="badgeColor" systemColor="labelColor"/>
+                    </tabBarItem>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="DTT-zo-vEb">
+                        <rect key="frame" x="0.0" y="48" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="tPE-3R-WQz" kind="relationship" relationship="rootViewController" id="prA-uc-tur"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dvI-bL-nfi" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="908.69565217391312" y="-312.05357142857139"/>
         </scene>
     </scenes>
     <resources>
@@ -306,7 +353,7 @@
         <image name="mainCat" width="32" height="32"/>
         <image name="upload" width="32" height="32"/>
         <systemColor name="labelColor">
-            <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <color red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

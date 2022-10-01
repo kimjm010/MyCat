@@ -35,7 +35,7 @@ class CatImagesViewController: UIViewController {
         imageCollectionView.refreshControl = refreshControl
         imageCollectionView.refreshControl?.addTarget(self, action: #selector(pullToRefresh(_:)), for: .valueChanged)
         
-      getRandomPic(page: page)
+        getRandomPic(page: page)
     }
     
     
@@ -45,8 +45,16 @@ class CatImagesViewController: UIViewController {
     /// 당겨서 imageCollectionView를 새로고침
     /// - Parameter sender: CatImagesViewController
     private func pullToRefresh(_ sender: Any) {
-        getRandomPic(page: 1)
-        #warning("Todo: - 새로고침하면 새로운 데이터를 불러올 것")
+        Network.shared.getRandomCatImages(page: 1) { [weak self] (data) in
+            do {
+                let result = try JSONDecoder().decode([Cat].self, from: data)
+                self?.catList = result
+                self?.imageCollectionView.reloadData()
+            } catch {
+                ProgressHUD.showFailed("Cannot reload Cat images. Please try later.")
+            }
+        }
+        
     }
     
     
@@ -75,9 +83,7 @@ class CatImagesViewController: UIViewController {
                 self.catList.append(contentsOf: res)
                 self.imageCollectionView.reloadData()
             } catch {
-                #if DEBUG
-                print(error)
-                #endif
+                ProgressHUD.showFailed("Cannot load Cat images. Please try later.")
             }
         }
     }

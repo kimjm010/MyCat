@@ -25,12 +25,6 @@ class FavoriteViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        
         getFavImages()
     }
     
@@ -42,6 +36,7 @@ class FavoriteViewController: UIViewController {
             do {
                 let result = try JSONDecoder().decode([FavoriteCat].self, from: data)
                 self.favCatList = result
+                print(#fileID, #function, #line, "- \(self.favCatList.last?.id)")
                 self.collectionView.reloadData()
             } catch {
                 #if DEBUG
@@ -94,6 +89,7 @@ extension FavoriteViewController: UICollectionViewDelegate {
                 print(#function, #file, #line, "즐겨찾기 이미지 삭제 되었나요?")
                 self.favCatList.remove(at: indexPath.item)
                 self.collectionView.deleteItems(at: [indexPath])
+                print(#fileID, #function, #line, "- \(indexPath.item) \(catId)")
             }
             
             ProgressHUD.showSuccess("이미지 삭제 완료")

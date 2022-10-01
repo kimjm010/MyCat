@@ -7,6 +7,8 @@
 
 import Foundation
 import Alamofire
+import ProgressHUD
+
 
 class Network {
     
@@ -35,8 +37,10 @@ class Network {
             case .success(_):
                 completion(response.data!)
             case .failure(let error):
+                ProgressHUD.showFailed("Fail to get radom cat images. Please try again later.")
+                
                 #if DEBUG
-                print(#function, #file, #line, "\(error)")
+                print(error.localizedDescription)
                 #endif
             }
         }
@@ -63,12 +67,15 @@ class Network {
             case .success(_):
                 completion(response.data!)
             case .failure(let error):
+                ProgressHUD.showFailed("Fail to upload cat image. Please try again later.")
+                
                 #if DEBUG
-                print(#function, #file, #line, "\(error)")
+                print(error.localizedDescription)
                 #endif
             }
         }
     }
+    
     
     // MARK: - Fetch My Uploaded Images
     
@@ -85,8 +92,10 @@ class Network {
             case .success(_):
                 completion(response.data!)
             case .failure(let error):
+                ProgressHUD.showFailed("Fail to get my uploaded cat image. Please try again later.")
+                
                 #if DEBUG
-                print(#function, #file, #line, "\(error)")
+                print(error.localizedDescription)
                 #endif
             }
         }
@@ -111,9 +120,12 @@ class Network {
                 switch response.result {
                 case .success(_):
                     completion(response.data!)
+                    print(#fileID, #function, #line, "- \(response.data)")
                 case .failure(let error):
+                    ProgressHUD.showFailed("Fail to upload favorite cat image. Please try again later.")
+                    
                     #if DEBUG
-                    print(#function, #file, #line, "\(error)")
+                    print(error.localizedDescription)
                     #endif
                 }
             }
@@ -135,8 +147,10 @@ class Network {
                 case .success(_):
                     completion(response.data!)
                 case .failure(let error):
+                    ProgressHUD.showFailed("Fail to get favorite cat image. Please try again later.")
+                    
                     #if DEBUG
-                    print(#function, #file, #line, "\(error)")
+                    print(error.localizedDescription)
                     #endif
                 }
             })
@@ -147,6 +161,7 @@ class Network {
     
     func deleteFavoriteImage(imageId: Int, completion: @escaping () -> Void) {
         let url = "v1/images/\(imageId)"
+        print(#fileID, #function, #line, "- \(baseURL)\(url)")
         
         let headers: HTTPHeaders = [
             "Content-Type": "application/json",
@@ -161,8 +176,10 @@ class Network {
                     completion()
                     print(#function, #file, #line, "\(response.debugDescription)")
                 case .failure(let error):
+                    ProgressHUD.showFailed("Fail to delete favorite cate image. Please try again later.")
+                    
                     #if DEBUG
-                    print(error)
+                    print(error.localizedDescription)
                     #endif
                 }
             })
@@ -184,10 +201,11 @@ class Network {
                 switch response.result {
                 case .success(_):
                     completion()
-                    print(#function, #file, #line, "\(response.debugDescription)")
                 case .failure(let error):
+                    ProgressHUD.showFailed("Fail to delete cat image. Please try again later.")
+                    
                     #if DEBUG
-                    print(error)
+                    print(error.localizedDescription)
                     #endif
                 }
             })
