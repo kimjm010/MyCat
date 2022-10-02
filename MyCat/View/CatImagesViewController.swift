@@ -46,10 +46,12 @@ class CatImagesViewController: UIViewController {
     /// - Parameter sender: CatImagesViewController
     private func pullToRefresh(_ sender: Any) {
         Network.shared.getRandomCatImages(page: 1) { [weak self] (data) in
+            guard let self = self else { return }
+            
             do {
                 let result = try JSONDecoder().decode([Cat].self, from: data)
-                self?.catList = result
-                self?.imageCollectionView.reloadData()
+                self.catList = result
+                self.imageCollectionView.reloadData()
             } catch {
                 ProgressHUD.showFailed("Cannot reload Cat images. Please try later.")
             }
