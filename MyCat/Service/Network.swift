@@ -120,7 +120,6 @@ class Network {
                 switch response.result {
                 case .success(_):
                     completion(response.data!)
-                    print(#fileID, #function, #line, "- \(response.data)")
                 case .failure(let error):
                     ProgressHUD.showFailed("Fail to upload favorite cat image. Please try again later.")
                     
@@ -160,7 +159,7 @@ class Network {
     // MARK: - Delete Favorite Image
     
     func deleteFavoriteImage(imageId: Int, completion: @escaping () -> Void) {
-        let url = "v1/images/\(imageId)"
+        let url = "v1/favourites/\(imageId)"
         print(#fileID, #function, #line, "- \(baseURL)\(url)")
         
         let headers: HTTPHeaders = [
@@ -174,7 +173,6 @@ class Network {
                 switch response.result {
                 case .success(_):
                     completion()
-                    print(#function, #file, #line, "\(response.debugDescription)")
                 case .failure(let error):
                     ProgressHUD.showFailed("Fail to delete favorite cate image. Please try again later.")
                     
