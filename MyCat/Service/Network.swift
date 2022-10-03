@@ -8,6 +8,7 @@
 import Foundation
 import Alamofire
 import ProgressHUD
+import UniformTypeIdentifiers
 
 
 class Network {
@@ -24,7 +25,7 @@ class Network {
     
     // MARK: - RandomImage
     
-    func getRandomCatImages(page: Int, completion: @escaping (_ result: Data) -> Void) {
+    func fetchRandomCatImages(page: Int, completion: @escaping (_ result: Data) -> Void) {
         let url = "v1/images/search?page=\(page)&limit=20"
         let headers: HTTPHeaders = [
             "Content-Type": "application/json",
@@ -33,23 +34,22 @@ class Network {
         
         AF.request(baseURL + url, method: .get, headers: headers)
             .responseDecodable(of: [Cat].self) { (response) in
-            switch response.result {
-            case .success(_):
-                completion(response.data!)
-            case .failure(let error):
-                ProgressHUD.showFailed("Fail to get radom cat images. Please try again later.")
-                
-                #if DEBUG
-                print(error.localizedDescription)
-                #endif
+                switch response.result {
+                case .success(_):
+                    completion(response.data!)
+                case .failure(let error):
+                    ProgressHUD.showFailed("Fail to get random cat images. Please try again later.")
+                }
             }
-        }
     }
     
     
     // MARK: - Upload Cat Image
     
     func uploadMyCatImage(imageData: Data, completion: @escaping (_ result: Data) -> Void) {
+        
+        print(#fileID, #function, #line, "- ^^")
+        
         let url = "v1/images/upload"
         let headers: HTTPHeaders = [
             "Content-Type": "multipart/form-data",
@@ -57,30 +57,32 @@ class Network {
         ]
         
         let multipartEncoding: (MultipartFormData) -> Void = { multipartFormData in
-            multipartFormData.append(imageData, withName: "file", fileName: "\(Date().timeIntervalSince1970).jpeg", mimeType: "image/jpeg")
+            
+            multipartFormData.append(imageData,
+                                     withName: "file",
+                                     fileName: "\(Date().timeIntervalSince1970).png",
+                                     mimeType: "image/png")
         }
         
+        
         AF.upload(multipartFormData: multipartEncoding, to: baseURL + url, method: .post, headers: headers)
-        .responseDecodable(of: [Cat].self) { (response) in
-            debugPrint(response)
-            switch response.result {
-            case .success(_):
-                completion(response.data!)
-            case .failure(let error):
-                ProgressHUD.showFailed("Fail to upload cat image. Please try again later.")
+            .responseDecodable(of: Cat.self) { (response) in
                 
-                #if DEBUG
-                print(error.localizedDescription)
-                #endif
+                switch response.result {
+                case .success(_):
+                    print(#fileID, #function, #line, "- \(self.baseURL + url)")
+                    completion(response.data!)
+                case .failure(let error):
+                    ProgressHUD.showFailed("Fail to upload cat image. Please try again later./n \(error.localizedDescription)")
+                }
             }
-        }
     }
     
     
     // MARK: - Fetch My Uploaded Images
     
     func fetchMyUploadImages(completion: @escaping (_ result: Data) -> Void) {
-        let url = "v1/images/"
+        let url = "v1/images/?limit=100"
         let headers: HTTPHeaders = [
             "Content-Type": "application/json",
             "x-api-key": Network.shared.apiKey
@@ -88,17 +90,18 @@ class Network {
         
         AF.request(baseURL + url, method: .get, headers: headers)
             .responseDecodable(of: [Cat].self) { (response) in
-            switch response.result {
-            case .success(_):
-                completion(response.data!)
-            case .failure(let error):
-                ProgressHUD.showFailed("Fail to get my uploaded cat image. Please try again later.")
-                
-                #if DEBUG
-                print(error.localizedDescription)
-                #endif
+                switch response.result {
+                case .success(_):
+                    print(#fileID, #function, #line, "- \(self.baseURL + url)")
+                    completion(response.data!)
+                case .failure(let error):
+                    ProgressHUD.showFailed("Fail to get my uploaded cat image. Please try again later.")
+                    
+#if DEBUG
+                    print(error.localizedDescription)
+#endif
+                }
             }
-        }
     }
     
     
@@ -123,9 +126,9 @@ class Network {
                 case .failure(let error):
                     ProgressHUD.showFailed("Fail to upload favorite cat image. Please try again later.")
                     
-                    #if DEBUG
+#if DEBUG
                     print(error.localizedDescription)
-                    #endif
+#endif
                 }
             }
     }
@@ -148,9 +151,9 @@ class Network {
                 case .failure(let error):
                     ProgressHUD.showFailed("Fail to get favorite cat image. Please try again later.")
                     
-                    #if DEBUG
+#if DEBUG
                     print(error.localizedDescription)
-                    #endif
+#endif
                 }
             })
     }
@@ -176,9 +179,9 @@ class Network {
                 case .failure(let error):
                     ProgressHUD.showFailed("Fail to delete favorite cate image. Please try again later.")
                     
-                    #if DEBUG
+#if DEBUG
                     print(error.localizedDescription)
-                    #endif
+#endif
                 }
             })
     }
@@ -198,13 +201,14 @@ class Network {
             .responseData(completionHandler: { (response) in
                 switch response.result {
                 case .success(_):
+                    print(#fileID, #function, #line, "- \(self.baseURL + url)")
                     completion()
                 case .failure(let error):
                     ProgressHUD.showFailed("Fail to delete cat image. Please try again later.")
                     
-                    #if DEBUG
+#if DEBUG
                     print(error.localizedDescription)
-                    #endif
+#endif
                 }
             })
     }

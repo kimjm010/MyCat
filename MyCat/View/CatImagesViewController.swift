@@ -45,7 +45,7 @@ class CatImagesViewController: UIViewController {
     /// 당겨서 imageCollectionView를 새로고침
     /// - Parameter sender: CatImagesViewController
     private func pullToRefresh(_ sender: Any) {
-        Network.shared.getRandomCatImages(page: 1) { [weak self] (data) in
+        Network.shared.fetchRandomCatImages(page: 1) { [weak self] (data) in
             guard let self = self else { return }
             
             do {
@@ -77,7 +77,7 @@ class CatImagesViewController: UIViewController {
     private func getRandomPic(page: Int) {
         self.page += 1
         
-        Network.shared.getRandomCatImages(page: self.page) { [weak self] (data) in
+        Network.shared.fetchRandomCatImages(page: self.page) { [weak self] (data) in
             guard let self = self else { return }
             
             do {
