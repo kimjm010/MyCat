@@ -169,23 +169,12 @@
                                             <constraint firstAttribute="width" constant="300" id="rTA-9R-MPY"/>
                                         </constraints>
                                     </imageView>
-                                    <button opaque="NO" alpha="0.69999999999999996" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RPb-4l-jVs">
-                                        <rect key="frame" x="309" y="191" width="48" height="34"/>
-                                        <color key="tintColor" systemColor="systemRedColor"/>
-                                        <state key="normal" title="Button"/>
-                                        <buttonConfiguration key="configuration" style="plain" image="trash.fill" catalog="system"/>
-                                        <connections>
-                                            <action selector="deleteImage:" destination="630-KR-YgN" eventType="touchUpInside" id="KAA-Rj-Vi5"/>
-                                        </connections>
-                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
                                     <constraint firstItem="1id-3F-NGs" firstAttribute="centerY" secondItem="iYG-zg-G6G" secondAttribute="centerY" id="2Zv-PZ-GZT"/>
                                     <constraint firstAttribute="height" constant="250" id="769-49-Nlt"/>
                                     <constraint firstItem="1id-3F-NGs" firstAttribute="centerX" secondItem="iYG-zg-G6G" secondAttribute="centerX" id="7rv-od-r2T"/>
-                                    <constraint firstItem="RPb-4l-jVs" firstAttribute="trailing" secondItem="1id-3F-NGs" secondAttribute="trailing" id="hzv-LZ-9ab"/>
-                                    <constraint firstItem="RPb-4l-jVs" firstAttribute="bottom" secondItem="1id-3F-NGs" secondAttribute="bottom" id="z48-25-yl8"/>
                                 </constraints>
                             </view>
                         </subviews>
@@ -199,7 +188,6 @@
                     </view>
                     <navigationItem key="navigationItem" id="sGc-YW-jPs"/>
                     <connections>
-                        <outlet property="deleteImageButton" destination="RPb-4l-jVs" id="Wwu-ag-CFM"/>
                         <outlet property="imageView" destination="1id-3F-NGs" id="G8K-5d-4In"/>
                     </connections>
                 </viewController>
@@ -375,16 +363,12 @@
     <resources>
         <image name="favorite" width="32" height="32"/>
         <image name="mainCat" width="32" height="32"/>
-        <image name="trash.fill" catalog="system" width="119" height="128"/>
         <image name="upload" width="32" height="32"/>
         <systemColor name="labelColor">
             <color red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
-        <systemColor name="systemRedColor">
-            <color red="1" green="0.23137254901960785" blue="0.18823529411764706" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

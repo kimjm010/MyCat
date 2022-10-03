@@ -17,8 +17,6 @@ class SelectImageViewController: UIViewController {
     
     @IBOutlet weak var imageView: UIImageView!
     
-    @IBOutlet weak var deleteImageButton: UIButton!
-    
     
     // MARK: - Vars
     
@@ -27,28 +25,12 @@ class SelectImageViewController: UIViewController {
     var selectedImage: UIImage?
     
     
-    // MARK: - IBActions
-    
-    @IBAction func deleteImage(_ sender: Any) {
-        if selectedImage != nil {
-            selectedImage = nil
-        }
-    }
-    
-    
     // MARK: - View Life Cycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         createBarButton()
-    }
-    
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        
-        initializeData()
     }
     
     
@@ -129,17 +111,6 @@ class SelectImageViewController: UIViewController {
         
         gallery.modalPresentationStyle = .fullScreen
         present(gallery, animated: true, completion: nil)
-    }
-    
-    
-    // MARK: - Initialize Data
-    
-    private func initializeData() {
-        if selectedImage == nil {
-            deleteImageButton.isHidden = true
-        } else {
-            deleteImageButton.isHidden = false
-        }
     }
 }
 

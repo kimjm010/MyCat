@@ -20,6 +20,8 @@ class MyUploadViewController: UIViewController {
     
     var catList = [Cat]()
     
+    static var reloadData: (() -> Void)?
+    
     
     // MARK: - View Life Cycle
     
@@ -40,7 +42,9 @@ class MyUploadViewController: UIViewController {
                 let result = try JSONDecoder().decode([Cat].self, from: data)
                 if self.catList != result {
                     self.catList = result
-                    self.collectionView.reloadData()
+                    UIView.animate(withDuration: 1.0) {
+                        self.collectionView.reloadData()
+                    }
                 }
             } catch {
                 ProgressHUD.showFailed("Fail to fetch My Uploaded Images. Please try again later.")
