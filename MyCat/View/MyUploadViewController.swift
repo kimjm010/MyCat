@@ -20,19 +20,13 @@ class MyUploadViewController: UIViewController {
     
     var catList = [Cat]()
     
-
+    
     // MARK: - View Life Cycle
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        getUPloadedImages()
-    }
-    
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        collectionView.reloadData()
+        getUPloadedImages()
     }
     
     
@@ -44,8 +38,10 @@ class MyUploadViewController: UIViewController {
             
             do {
                 let result = try JSONDecoder().decode([Cat].self, from: data)
-                self.catList = result
-                self.collectionView.reloadData()
+                if self.catList != result {
+                    self.catList = result
+                    self.collectionView.reloadData()
+                }
             } catch {
                 ProgressHUD.showFailed("Fail to fetch My Uploaded Images. Please try again later.")
             }
@@ -61,6 +57,7 @@ class MyUploadViewController: UIViewController {
 extension MyUploadViewController: UICollectionViewDataSource {
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        print(#fileID, #function, #line, "- \(catList.count)")
         return catList.count
     }
 
@@ -87,8 +84,8 @@ extension MyUploadViewController: UICollectionViewDelegate {
         let target = catList[indexPath.item]
     
         alert(title: "알림", message: "해당 이미지를 삭제하시겠습니까?") { [weak self] _ in
-            guard let self = self else { return }
-            guard let catId = target.id else { return }
+            guard let self = self,
+                  let catId = target.id else { return }
             
             Network.shared.deleteMyCatImage(imageId: catId) {
                 print(#function, #file, #line, "삭제했나???!!!")

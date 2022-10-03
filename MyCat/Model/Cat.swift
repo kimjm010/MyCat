@@ -8,7 +8,7 @@
 import Foundation
 
 
-struct Cat: Codable {
+struct Cat: Codable, Equatable {
     let id: String?
     let url: String?
     let width: Int?
