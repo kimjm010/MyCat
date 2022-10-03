@@ -23,4 +23,15 @@ extension UIViewController {
         
         present(alert, animated: true, completion: nil)
     }
+    
+    
+    func alertNoImage(title: String, message: String? = nil) {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        
+        let okAction = UIAlertAction(title: "Ok", style: .default)
+        alert.addAction(okAction)
+        
+        
+        present(alert, animated: true, completion: nil)
+    }
 }
