@@ -61,13 +61,13 @@ class MyUploadViewController: UIViewController {
 extension MyUploadViewController: UICollectionViewDataSource {
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        print(#fileID, #function, #line, "- \(catList.count)")
         return catList.count
     }
 
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "MyUploadsCollectionViewCell", for: indexPath) as! MyUploadsCollectionViewCell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "MyUploadsCollectionViewCell",
+                                                      for: indexPath) as! MyUploadsCollectionViewCell
         
         let target = catList[indexPath.item]
         guard let imageUrlStr = target.url else { return UICollectionViewCell() }
@@ -92,7 +92,6 @@ extension MyUploadViewController: UICollectionViewDelegate {
                   let catId = target.id else { return }
             
             Network.shared.deleteMyCatImage(imageId: catId) {
-                print(#function, #file, #line, "삭제했나???!!!")
                 self.catList.remove(at: indexPath.item)
                 self.collectionView.deleteItems(at: [indexPath])
             }

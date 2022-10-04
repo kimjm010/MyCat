@@ -56,12 +56,12 @@ class SelectImageViewController: UIViewController {
     /// Upload Cat Image
     @objc private func uploadCatImage() {
         guard let imageData = selectedImage?.pngData() else { return }
-        Network.shared.uploadMyCatImage(imageData: imageData) { response in
-            print(#fileID, #function, #line, "- \(response.description)")
+        Network.shared.postMyCatImage(imageData: imageData) { [weak self] in
+            guard let self = self else { return }
+            
             ProgressHUD.showSuccess("고양이 이미지가 정상적으로 등록되었습니다 :)")
+            self.dismiss(animated: true, completion: nil)
         }
-        
-        dismiss(animated: true, completion: nil)
     }
     
     

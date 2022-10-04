@@ -43,42 +43,7 @@ class Network {
                 case .success(_):
                     completion(response.data!)
                 case .failure(let error):
-                    ProgressHUD.showFailed("Fail to get random cat images. Please try again later.")
-                }
-            }
-    }
-    
-    
-    // MARK: - Upload Cat Image
-    
-    func uploadMyCatImage(imageData: Data, completion: @escaping (_ result: Data) -> Void) {
-        
-        print(#fileID, #function, #line, "- ^^")
-        
-        let url = "v1/images/upload"
-        let headers: HTTPHeaders = [
-            "Content-Type": "multipart/form-data",
-            "x-api-key": apiKey as! String
-        ]
-        
-        let multipartEncoding: (MultipartFormData) -> Void = { multipartFormData in
-            
-            multipartFormData.append(imageData,
-                                     withName: "file",
-                                     fileName: "\(Date().timeIntervalSince1970).png",
-                                     mimeType: "image/png")
-        }
-        
-        
-        AF.upload(multipartFormData: multipartEncoding, to: baseURL + url, method: .post, headers: headers)
-            .responseDecodable(of: Cat.self) { (response) in
-                
-                switch response.result {
-                case .success(_):
-                    print(#fileID, #function, #line, "- \(self.baseURL + url)")
-                    completion(response.data!)
-                case .failure(let error):
-                    ProgressHUD.showFailed("Fail to upload cat image. Please try again later./n \(error.localizedDescription)")
+                    ProgressHUD.showFailed("Fail to get random cat images. Please try again later.\n \(error.localizedDescription)")
                 }
             }
     }
@@ -100,11 +65,59 @@ class Network {
                     print(#fileID, #function, #line, "- \(self.baseURL + url)")
                     completion(response.data!)
                 case .failure(let error):
-                    ProgressHUD.showFailed("Fail to get my uploaded cat image. Please try again later.")
-                    
-#if DEBUG
-                    print(error.localizedDescription)
-#endif
+                    ProgressHUD.showFailed("Fail to get my uploaded cat image. Please try again later.\n \(error.localizedDescription)")
+                }
+            }
+    }
+    
+    
+    // MARK: - Fetch Favorite Images
+    
+    func fetchFavoriteImages(completion: @escaping (_ result: Data) -> Void) {
+        let url = "v1/favourites"
+        let headers: HTTPHeaders = [
+            "Content-Type": "application/json",
+            "x-api-key": apiKey as! String
+        ]
+        
+        AF.request(baseURL + url, method: .get, headers: headers)
+            .responseDecodable(of: [FavoriteCat].self, completionHandler: { (response) in
+                switch response.result {
+                case .success(_):
+                    completion(response.data!)
+                case .failure(let error):
+                    ProgressHUD.showFailed("Fail to get favorite cat image. Please try again later.\n \(error.localizedDescription)")
+                }
+            })
+    }
+    
+    
+    // MARK: - Post Cat Image
+    
+    func postMyCatImage(imageData: Data, completion: @escaping () -> Void) {
+        let url = "v1/images/upload"
+        let headers: HTTPHeaders = [
+            "Content-Type": "multipart/form-data",
+            "x-api-key": apiKey as! String
+        ]
+        
+        let multipartEncoding: (MultipartFormData) -> Void = { multipartFormData in
+            
+            multipartFormData.append(imageData,
+                                     withName: "file",
+                                     fileName: "\(Date().timeIntervalSince1970).png",
+                                     mimeType: "image/png")
+        }
+        
+        
+        AF.upload(multipartFormData: multipartEncoding, to: baseURL + url, method: .post, headers: headers)
+            .responseDecodable(of: Cat.self) { (response) in
+                
+                switch response.result {
+                case .success(_):
+                    completion()
+                case .failure(let error):
+                    ProgressHUD.showFailed("Fail to upload cat image. Please try again later./n \(error.localizedDescription)")
                 }
             }
     }
@@ -129,38 +142,9 @@ class Network {
                 case .success(_):
                     completion(response.data!)
                 case .failure(let error):
-                    ProgressHUD.showFailed("Fail to upload favorite cat image. Please try again later.")
-                    
-#if DEBUG
-                    print(error.localizedDescription)
-#endif
+                    ProgressHUD.showFailed("Fail to upload favorite cat image. Please try again later.\n \(error.localizedDescription)")
                 }
             }
-    }
-    
-    
-    // MARK: - Fetch Favorite Images
-    
-    func fetchFavoriteImages(completion: @escaping (_ result: Data) -> Void) {
-        let url = "v1/favourites"
-        let headers: HTTPHeaders = [
-            "Content-Type": "application/json",
-            "x-api-key": apiKey as! String
-        ]
-        
-        AF.request(baseURL + url, method: .get, headers: headers)
-            .responseDecodable(of: [FavoriteCat].self, completionHandler: { (response) in
-                switch response.result {
-                case .success(_):
-                    completion(response.data!)
-                case .failure(let error):
-                    ProgressHUD.showFailed("Fail to get favorite cat image. Please try again later.")
-                    
-#if DEBUG
-                    print(error.localizedDescription)
-#endif
-                }
-            })
     }
     
     
@@ -182,11 +166,7 @@ class Network {
                 case .success(_):
                     completion()
                 case .failure(let error):
-                    ProgressHUD.showFailed("Fail to delete favorite cate image. Please try again later.")
-                    
-#if DEBUG
-                    print(error.localizedDescription)
-#endif
+                    ProgressHUD.showFailed("Fail to delete favorite cate image. Please try again later.\n \(error.localizedDescription)")
                 }
             })
     }
@@ -209,11 +189,7 @@ class Network {
                     print(#fileID, #function, #line, "- \(self.baseURL + url)")
                     completion()
                 case .failure(let error):
-                    ProgressHUD.showFailed("Fail to delete cat image. Please try again later.")
-                    
-#if DEBUG
-                    print(error.localizedDescription)
-#endif
+                    ProgressHUD.showFailed("Fail to delete cat image. Please try again later.\n \(error.localizedDescription)")
                 }
             })
     }
