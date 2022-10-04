@@ -13,23 +13,28 @@ import UniformTypeIdentifiers
 
 class Network {
     
+    // MARK: - Singleton
+    
     static let shared = Network()
     private init() { }
     
-    private let apiKey = "live_VDbo6jETe6lCzngQkV0xS1cEkrVbAjvc3I3pgjosl9UIEJHPZECTBKIaccQ3Ojna"
+    
+    // MARK: - Vars
+    
+    let apiKey = Bundle.main.infoDictionary?["MY_CAT_API_KEY"] ?? ""
     
     private var baseURL: String {
         return "https://api.thecatapi.com/"
     }
     
     
-    // MARK: - RandomImage
+    // MARK: - Fetch Random Cat Image
     
     func fetchRandomCatImages(page: Int, completion: @escaping (_ result: Data) -> Void) {
         let url = "v1/images/search?page=\(page)&limit=20"
         let headers: HTTPHeaders = [
             "Content-Type": "application/json",
-            "x-api-key": Network.shared.apiKey
+            "x-api-key": apiKey as! String
         ]
         
         AF.request(baseURL + url, method: .get, headers: headers)
@@ -53,7 +58,7 @@ class Network {
         let url = "v1/images/upload"
         let headers: HTTPHeaders = [
             "Content-Type": "multipart/form-data",
-            "x-api-key": Network.shared.apiKey
+            "x-api-key": apiKey as! String
         ]
         
         let multipartEncoding: (MultipartFormData) -> Void = { multipartFormData in
@@ -85,7 +90,7 @@ class Network {
         let url = "v1/images/?limit=100"
         let headers: HTTPHeaders = [
             "Content-Type": "application/json",
-            "x-api-key": Network.shared.apiKey
+            "x-api-key": apiKey as! String
         ]
         
         AF.request(baseURL + url, method: .get, headers: headers)
@@ -111,7 +116,7 @@ class Network {
         let url = "v1/favourites"
         let headers: HTTPHeaders = [
             "Content-Type": "application/json",
-            "x-api-key": Network.shared.apiKey
+            "x-api-key": apiKey as! String
         ]
         
         let parameters: [String: String] = [
@@ -140,7 +145,7 @@ class Network {
         let url = "v1/favourites"
         let headers: HTTPHeaders = [
             "Content-Type": "application/json",
-            "x-api-key": Network.shared.apiKey
+            "x-api-key": apiKey as! String
         ]
         
         AF.request(baseURL + url, method: .get, headers: headers)
@@ -167,7 +172,7 @@ class Network {
         
         let headers: HTTPHeaders = [
             "Content-Type": "application/json",
-            "x-api-key": Network.shared.apiKey
+            "x-api-key": apiKey as! String
         ]
         
         
@@ -194,7 +199,7 @@ class Network {
         
         let headers: HTTPHeaders = [
             "Content-Type": "application/json",
-            "x-api-key": Network.shared.apiKey
+            "x-api-key": apiKey as! String
         ]
         
         AF.request(baseURL + url, method: .delete, headers: headers)

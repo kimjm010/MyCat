@@ -1,0 +1,11 @@
+//
+//  Config.xcconfig
+//  MyCat
+//
+//  Created by Chris Kim on 10/4/22.
+//
+
+// Configuration settings file format documentation can be found at:
+// https://help.apple.com/xcode/#/dev745c5c974
+
+MY_CAT_API_KEY = live_VDbo6jETe6lCzngQkV0xS1cEkrVbAjvc3I3pgjosl9UIEJHPZECTBKIaccQ3Ojna
