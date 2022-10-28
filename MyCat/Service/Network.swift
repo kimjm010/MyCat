@@ -5,10 +5,13 @@
 //  Created by Chris Kim on 9/13/22.
 //
 
+
+import UniformTypeIdentifiers
+import ProgressHUD
+import RxAlamofire
 import Foundation
 import Alamofire
-import ProgressHUD
-import UniformTypeIdentifiers
+import RxSwift
 
 
 class Network {

@@ -20,6 +20,8 @@ class CatImagesViewController: UIViewController {
     
     // MARK: - Vars
     
+    private let viewModel = CatImagesViewModel()
+    
     var catList = [Cat]()
     
     var page = 0
@@ -39,10 +41,9 @@ class CatImagesViewController: UIViewController {
     }
     
     
-    // MARK: - Refresh Collection View
-    
     @objc
     /// 당겨서 imageCollectionView를 새로고침
+    ///
     /// - Parameter sender: CatImagesViewController
     private func pullToRefresh(_ sender: Any) {
         Network.shared.fetchRandomCatImages(page: 1) { [weak self] (data) in
@@ -60,8 +61,8 @@ class CatImagesViewController: UIViewController {
     }
     
     
-    // MARK: - End RefreshControl Refreshin
     /// Refresh Control 동작을 멈춤
+    ///
     /// - Parameters:
     ///   - scrollView: imageCollectionView
     ///   - decelerate: scrolling을 계속 할 것인지 여부
@@ -72,8 +73,9 @@ class CatImagesViewController: UIViewController {
     }
     
     
-    // MARK: - Fetch Cat Image
-    
+    /// Fetch Cat Image
+    ///
+    /// - Parameter page: pageing value
     private func getRandomPic(page: Int) {
         self.page += 1
         

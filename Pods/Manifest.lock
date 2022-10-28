@@ -3,12 +3,26 @@ PODS:
   - Gallery (2.4.0)
   - Kingfisher (7.3.2)
   - ProgressHUD (13.6)
+  - RxAlamofire (6.1.1):
+    - RxAlamofire/Core (= 6.1.1)
+  - RxAlamofire/Core (6.1.1):
+    - Alamofire (~> 5.4)
+    - RxSwift (~> 6.0)
+  - RxCocoa (6.5.0):
+    - RxRelay (= 6.5.0)
+    - RxSwift (= 6.5.0)
+  - RxRelay (6.5.0):
+    - RxSwift (= 6.5.0)
+  - RxSwift (6.5.0)
 
 DEPENDENCIES:
   - Alamofire
   - Gallery
   - Kingfisher (~> 7.0)
   - ProgressHUD
+  - RxAlamofire
+  - RxCocoa (= 6.5.0)
+  - RxSwift (= 6.5.0)
 
 SPEC REPOS:
   trunk:
@@ -16,13 +30,21 @@ SPEC REPOS:
     - Gallery
     - Kingfisher
     - ProgressHUD
+    - RxAlamofire
+    - RxCocoa
+    - RxRelay
+    - RxSwift
 
 SPEC CHECKSUMS:
   Alamofire: d368e1ff8a298e6dde360e35a3e68e6c610e7204
   Gallery: b7fc1aeb68a39ad6d2c423574750196bf9b25e5c
   Kingfisher: 0086ad83719761ba9b2cdaf6ef4d5b4878cbae23
   ProgressHUD: 4bdaa0d2ddf676b23324b199f9facffb5c3a1620
+  RxAlamofire: beb75a1c452d0de225651db4903f5d29d034a620
+  RxCocoa: 94f817b71c07517321eb4f9ad299112ca8af743b
+  RxRelay: 1de1523e604c72b6c68feadedd1af3b1b4d0ecbd
+  RxSwift: 5710a9e6b17f3c3d6e40d6e559b9fa1e813b2ef8
 
-PODFILE CHECKSUM: 1e2b70f639c62295e4154f3fcde771565a735b57
+PODFILE CHECKSUM: e3cb21fa00f6654a89a075d9d804d4358ef61e82
 
-COCOAPODS: 1.11.2
+COCOAPODS: 1.11.3

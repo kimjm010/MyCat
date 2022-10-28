@@ -34,8 +34,7 @@ class SelectImageViewController: UIViewController {
     }
     
     
-    // MARK: - Create Bar Buttons
-    
+    /// Create Bar Buttons
     private func createBarButton() {
         let uploadBarButton = UIBarButtonItem(title: "Upload", style: .plain, target: self, action: #selector(uploadCatImage))
         let imageSelectBarButton = UIBarButtonItem(title: "Image", style: .plain, target: self, action: #selector(selectImage))
@@ -45,12 +44,10 @@ class SelectImageViewController: UIViewController {
     }
     
     
-    
     /// close ViewController
     @objc private func closeVC() {
         dismiss(animated: true, completion: nil)
     }
-    
     
     
     /// Upload Cat Image
@@ -71,8 +68,7 @@ class SelectImageViewController: UIViewController {
     }
     
     
-    // MARK: - Add Gallery Action
-    
+    /// Add Gallery Action
     private func actionAttach() {
         let optionMenu = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
         
@@ -98,8 +94,9 @@ class SelectImageViewController: UIViewController {
     }
     
     
-    // MARK: - Present Image Gallery
-    
+    /// Present Image Gallery
+    ///
+    /// - Parameter camera: Whether Using Camera
     private func showImageGallery(camera: Bool) {
         gallery = GalleryController()
         gallery.delegate = self

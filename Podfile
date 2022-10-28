@@ -9,6 +9,9 @@ pod 'Kingfisher', '~> 7.0'
 pod 'Alamofire'
 pod 'Gallery'
 pod 'ProgressHUD'
+pod 'RxSwift', '6.5.0'
+pod 'RxCocoa', '6.5.0'
+pod 'RxAlamofire'
 
   # Pods for MyCat
 
