@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		AEA291666E2A943F085A240A /* Pods_MyCat.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A56E6E8F2EF676152BC5B50 /* Pods_MyCat.framework */; };
+		F5122349290E972200001A9A /* FavoriteViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5122348290E972200001A9A /* FavoriteViewModel.swift */; };
 		F521182628CF84E900A32CD9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F521182528CF84E900A32CD9 /* AppDelegate.swift */; };
 		F521182828CF84E900A32CD9 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F521182728CF84E900A32CD9 /* SceneDelegate.swift */; };
 		F521182D28CF84E900A32CD9 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F521182B28CF84E900A32CD9 /* Main.storyboard */; };
@@ -15,6 +16,7 @@
 		F521183228CF84EB00A32CD9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F521183028CF84EB00A32CD9 /* LaunchScreen.storyboard */; };
 		F555656428E71FC400C81339 /* NSNotificationName+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F555656328E71FC400C81339 /* NSNotificationName+Extension.swift */; };
 		F55F242629069EF000A5417B /* CatImagesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F55F242529069EF000A5417B /* CatImagesViewModel.swift */; };
+		F55F246F290BCD8B00A5417B /* UIViewController+RxAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = F55F246E290BCD8B00A5417B /* UIViewController+RxAlert.swift */; };
 		F58E771828EBF6FA00C58E9D /* Config.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = F58E771728EBF6FA00C58E9D /* Config.xcconfig */; };
 		F59C878828CF8F20000443C5 /* Cat.swift in Sources */ = {isa = PBXBuildFile; fileRef = F59C878728CF8F20000443C5 /* Cat.swift */; };
 		F59C878C28D00594000443C5 /* CatImagesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F59C878B28D00594000443C5 /* CatImagesViewController.swift */; };
@@ -33,6 +35,7 @@
 		0A56E6E8F2EF676152BC5B50 /* Pods_MyCat.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MyCat.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3C4E18113F9388D2A3EC843D /* Pods-MyCat.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyCat.debug.xcconfig"; path = "Target Support Files/Pods-MyCat/Pods-MyCat.debug.xcconfig"; sourceTree = "<group>"; };
 		91DF7EC202E3C0386116A37C /* Pods-MyCat.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyCat.release.xcconfig"; path = "Target Support Files/Pods-MyCat/Pods-MyCat.release.xcconfig"; sourceTree = "<group>"; };
+		F5122348290E972200001A9A /* FavoriteViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteViewModel.swift; sourceTree = "<group>"; };
 		F521182228CF84E900A32CD9 /* MyCat.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MyCat.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F521182528CF84E900A32CD9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F521182728CF84E900A32CD9 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -42,6 +45,7 @@
 		F521183328CF84EB00A32CD9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F555656328E71FC400C81339 /* NSNotificationName+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSNotificationName+Extension.swift"; sourceTree = "<group>"; };
 		F55F242529069EF000A5417B /* CatImagesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CatImagesViewModel.swift; sourceTree = "<group>"; };
+		F55F246E290BCD8B00A5417B /* UIViewController+RxAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+RxAlert.swift"; sourceTree = "<group>"; };
 		F58E771728EBF6FA00C58E9D /* Config.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Config.xcconfig; sourceTree = "<group>"; };
 		F59C878728CF8F20000443C5 /* Cat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cat.swift; sourceTree = "<group>"; };
 		F59C878B28D00594000443C5 /* CatImagesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CatImagesViewController.swift; sourceTree = "<group>"; };
@@ -117,6 +121,7 @@
 			isa = PBXGroup;
 			children = (
 				F55F242529069EF000A5417B /* CatImagesViewModel.swift */,
+				F5122348290E972200001A9A /* FavoriteViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -165,6 +170,7 @@
 			children = (
 				F59C87AF28D15D3A000443C5 /* UIVIewController+Alert.swift */,
 				F555656328E71FC400C81339 /* NSNotificationName+Extension.swift */,
+				F55F246E290BCD8B00A5417B /* UIViewController+RxAlert.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -297,6 +303,7 @@
 				F59C87B428D1AD82000443C5 /* FavoriteCollectionViewCell.swift in Sources */,
 				F59C87B028D15D3A000443C5 /* UIVIewController+Alert.swift in Sources */,
 				F59C878828CF8F20000443C5 /* Cat.swift in Sources */,
+				F55F246F290BCD8B00A5417B /* UIViewController+RxAlert.swift in Sources */,
 				F59C87A928D054FA000443C5 /* Network.swift in Sources */,
 				F521182628CF84E900A32CD9 /* AppDelegate.swift in Sources */,
 				F59C879028D005AF000443C5 /* MyUploadViewController.swift in Sources */,
@@ -306,6 +313,7 @@
 				F55F242629069EF000A5417B /* CatImagesViewModel.swift in Sources */,
 				F59C87AB28D07714000443C5 /* SelectImageViewController.swift in Sources */,
 				F59C878E28D005A0000443C5 /* FavoriteViewController.swift in Sources */,
+				F5122349290E972200001A9A /* FavoriteViewModel.swift in Sources */,
 				F59C879C28D00D25000443C5 /* ImagesCollectionViewCell.swift in Sources */,
 				F59C87AD28D0CC00000443C5 /* MyUploadsCollectionViewCell.swift in Sources */,
 				F59C878C28D00594000443C5 /* CatImagesViewController.swift in Sources */,

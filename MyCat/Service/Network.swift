@@ -17,15 +17,13 @@ import RxSwift
 class Network {
     
     // MARK: - Singleton
-    
     static let shared = Network()
     private init() { }
     
     
     // MARK: - Vars
-    
+    private let disposeBag = DisposeBag()
     let apiKey = Bundle.main.infoDictionary?["MY_CAT_API_KEY"] ?? ""
-    
     private var baseURL: String {
         return "https://api.thecatapi.com/"
     }
@@ -49,6 +47,27 @@ class Network {
                     ProgressHUD.showFailed("Fail to get random cat images. Please try again later.\n \(error.localizedDescription)")
                 }
             }
+    }
+    
+    
+    func fetchCatImages(page: Int) -> Observable<Data> {
+        let url = "v1/images/search?page=\(page)&limit=20"
+        let headers: HTTPHeaders = [
+            "Content-Type": "application/json",
+            "x-api-key": apiKey as! String
+        ]
+        
+        return Observable.create { (observer) in
+            RxAlamofire.requestData(.get, self.baseURL + url, headers: headers)
+                .debounce(.milliseconds(500), scheduler: MainScheduler.instance)
+                .filter { 200..<300 ~= $0.0.statusCode }
+                .subscribe(onNext: {
+                    observer.onNext($0.1)
+                })
+                .disposed(by: self.disposeBag)
+            
+            return Disposables.create()
+        }
     }
     
     
@@ -95,6 +114,27 @@ class Network {
     }
     
     
+    func fetchFavImages() -> Observable<Data> {
+        let url = "v1/favourites"
+        let headers: HTTPHeaders = [
+            "Content-Type": "application/json",
+            "x-api-key": apiKey as! String
+        ]
+        
+        return Observable.create { (observer) in
+            RxAlamofire.requestData(.get, self.baseURL + url, headers: headers)
+                .debounce(.milliseconds(500), scheduler: MainScheduler.instance)
+                .filter { 200..<300 ~= $0.0.statusCode }
+                .subscribe(onNext: {
+                    observer.onNext($0.1)
+                })
+                .disposed(by: self.disposeBag)
+            
+            return Disposables.create()
+        }
+    }
+    
+    
     // MARK: - Post Cat Image
     
     func postMyCatImage(imageData: Data, completion: @escaping () -> Void) {
@@ -126,9 +166,32 @@ class Network {
     }
     
     
+    #warning("Todo: - 여기서 Add누르면 즐겨찾기 이미지 등록하도록 구현할 것!")
     // MARK: - Post Favorite Image
     
-    func postFavoriteImage(imageId: String, completion: @escaping (_ result: Data) -> Void) {
+//    func postFavoriteImage(imageId: String, completion: @escaping (_ result: Data) -> Void) {
+//        let url = "v1/favourites"
+//        let headers: HTTPHeaders = [
+//            "Content-Type": "application/json",
+//            "x-api-key": apiKey as! String
+//        ]
+//
+//        let parameters: [String: String] = [
+//            "image_id": "\(imageId)"
+//        ]
+//
+//        AF.request(baseURL + url, method: .post, parameters: parameters, encoder: JSONParameterEncoder.default, headers: headers)
+//            .responseData { (response) in
+//                switch response.result {
+//                case .success(_):
+//                    completion(response.data!)
+//                case .failure(let error):
+//                    ProgressHUD.showFailed("Fail to upload favorite cat image. Please try again later.\n \(error.localizedDescription)")
+//                }
+//            }
+//    }
+    
+    func uploadFavoriteImage(imageId: String) -> Observable<Data?> {
         let url = "v1/favourites"
         let headers: HTTPHeaders = [
             "Content-Type": "application/json",
@@ -139,15 +202,32 @@ class Network {
             "image_id": "\(imageId)"
         ]
         
-        AF.request(baseURL + url, method: .post, parameters: parameters, encoder: JSONParameterEncoder.default, headers: headers)
-            .responseData { (response) in
-                switch response.result {
-                case .success(_):
-                    completion(response.data!)
-                case .failure(let error):
-                    ProgressHUD.showFailed("Fail to upload favorite cat image. Please try again later.\n \(error.localizedDescription)")
-                }
-            }
+        return Observable.create { [weak self] (observer) in
+            guard let self = self else { return Disposables.create() }
+            
+            RxAlamofire.request(.post, self.baseURL + url, parameters: parameters, encoding: URLEncoding.httpBody, headers: headers)
+                .debounce(.milliseconds(500), scheduler: MainScheduler.instance)
+                .debug()
+                .validate(statusCode: 200..<300)
+                .debug()
+                .subscribe(onNext: {
+                    print(#fileID, #function, #line, "- uploadFavoriteImage \($0)")
+                    observer.onNext(nil)
+                })
+                .disposed(by: self.disposeBag)
+            
+//            RxAlamofire.requestData(.post, self.baseURL + url, parameters: parameters, encoding: URLEncoding.httpBody, headers: headers)
+//                .debounce(.milliseconds(500), scheduler: MainScheduler.instance)
+//                .debug()
+//                .filter { 200..<300 ~= $0.0.statusCode }
+//                .debug()
+//                .subscribe(onNext: {
+//                    print(#fileID, #function, #line, "- uploadFavoriteImage \($0.1)")
+//                    observer.onNext($0.1)
+//                })
+//                .disposed(by: self.disposeBag)
+            return Disposables.create()
+        }
     }
     
     
