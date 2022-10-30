@@ -60,8 +60,4 @@ class CatImagesViewModel {
             })
             .disposed(by: disposeBag)
     }
-    
-    
-    
-    
 }
