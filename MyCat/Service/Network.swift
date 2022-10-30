@@ -193,19 +193,26 @@ class Network {
     
     func uploadFavoriteImage(imageId: String) -> Observable<Data?> {
         let url = "v1/favourites"
-        let headers: HTTPHeaders = [
-            "Content-Type": "application/json",
-            "x-api-key": apiKey as! String
-        ]
-        
         let parameters: [String: String] = [
             "image_id": "\(imageId)"
         ]
         
+        guard let resultUrl = URL(string: baseURL + url) else { return Observable.empty() }
+        var urlRequst = URLRequest(url: resultUrl)
+        urlRequst.method = .post
+        urlRequst.headers.add(.contentType("application/json"))
+        urlRequst.headers.add(name: "x-api-key", value: apiKey as! String)
+        
+        do {
+            urlRequst.httpBody = try JSONEncoder().encode(parameters)
+        } catch {
+            print(#fileID, #function, #line, "- ")
+        }
+        
         return Observable.create { [weak self] (observer) in
             guard let self = self else { return Disposables.create() }
             
-            RxAlamofire.request(.post, self.baseURL + url, parameters: parameters, encoding: URLEncoding.httpBody, headers: headers)
+            RxAlamofire.request(urlRequst)
                 .debounce(.milliseconds(500), scheduler: MainScheduler.instance)
                 .debug()
                 .validate(statusCode: 200..<300)
@@ -215,17 +222,6 @@ class Network {
                     observer.onNext(nil)
                 })
                 .disposed(by: self.disposeBag)
-            
-//            RxAlamofire.requestData(.post, self.baseURL + url, parameters: parameters, encoding: URLEncoding.httpBody, headers: headers)
-//                .debounce(.milliseconds(500), scheduler: MainScheduler.instance)
-//                .debug()
-//                .filter { 200..<300 ~= $0.0.statusCode }
-//                .debug()
-//                .subscribe(onNext: {
-//                    print(#fileID, #function, #line, "- uploadFavoriteImage \($0.1)")
-//                    observer.onNext($0.1)
-//                })
-//                .disposed(by: self.disposeBag)
             return Disposables.create()
         }
     }
