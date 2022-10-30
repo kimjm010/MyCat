@@ -238,8 +238,6 @@
                                     </collectionViewCell>
                                 </cells>
                                 <connections>
-                                    <outlet property="dataSource" destination="tPE-3R-WQz" id="ox9-7Z-Qdc"/>
-                                    <outlet property="delegate" destination="tPE-3R-WQz" id="hpf-tD-Akq"/>
                                     <outlet property="prefetchDataSource" destination="tPE-3R-WQz" id="nSq-C5-fOi"/>
                                 </connections>
                             </collectionView>

@@ -9,6 +9,8 @@ import UIKit
 import Alamofire
 import Kingfisher
 import ProgressHUD
+import RxCocoa
+import RxSwift
 
 
 class CatImagesViewController: UIViewController {
@@ -19,8 +21,8 @@ class CatImagesViewController: UIViewController {
     
     
     // MARK: - Vars
-    
     private let viewModel = CatImagesViewModel()
+    private let disposeBag = DisposeBag()
     
     var catList = [Cat]()
     
@@ -34,10 +36,58 @@ class CatImagesViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        imageCollectionView.refreshControl = refreshControl
-        imageCollectionView.refreshControl?.addTarget(self, action: #selector(pullToRefresh(_:)), for: .valueChanged)
+        fetchCatImages(page: page)
         
-        getRandomPic(page: page)
+        imageCollectionView.refreshControl = refreshControl
+        refreshControl.addTarget(self, action: #selector(pullToRefresh(_:)), for: .valueChanged)
+        
+        bindUI()
+        controllCollectionViewEvent()
+        
+        imageCollectionView.rx.setDelegate(self)
+            .disposed(by: disposeBag)
+    }
+    
+    
+    /// Bind ViewModel to ImageCollectionView
+    private func bindUI() {
+        viewModel.catImagesSubject
+            .bind(to: imageCollectionView.rx.items(cellIdentifier: ImagesCollectionViewCell.identifier, cellType: ImagesCollectionViewCell.self)) { (row, cat, cell) in
+                guard let urlStr = cat.url else { return }
+                let url = URL(string: urlStr)
+                cell.catImageView.kf.setImage(with: url,
+                                              placeholder: UIImage(named: "zoo"),
+                                              options: [.transition(.fade(0.3))])
+            }
+            .disposed(by: disposeBag)
+    }
+    
+    
+    /// Control ImageCollectionView Select Event
+    /// Ask whether add to favorite folder
+    private func controllCollectionViewEvent() {
+        imageCollectionView.rx.modelSelected(Cat.self)
+            .subscribe(onNext: { [weak self] (cat) in
+                guard let self = self else { return }
+                self.viewModel.selectedImageSubject.onNext(cat)
+                self.alertToUser(title: "Alert", message: "Do you want to add in favorite image folder?")
+                    .subscribe(onNext: {
+                        switch $0 {
+                        case .ok:
+                           
+                            #warning("Todo: - 이미지 추가 -> ViewModel에서 추가하는 로직 작성")
+                            if let catId = cat.id {
+                                self.viewModel.uploadFavImage(imageId: catId)
+                                print(#fileID, #function, #line, "- uploadFavImage: \(cat.id) \(cat.url)")
+                            }
+                        default:
+                            break
+                        }
+                    })
+                    .disposed(by: self.disposeBag)
+                print(#fileID, #function, #line, "- \(cat)")
+            })
+            .disposed(by: disposeBag)
     }
     
     
@@ -73,64 +123,18 @@ class CatImagesViewController: UIViewController {
     }
     
     
-    /// Fetch Cat Image
-    ///
-    /// - Parameter page: pageing value
-    private func getRandomPic(page: Int) {
+    /// Fetch Cat Random Image
+    /// - Parameter page: page of images
+    private func fetchCatImages(page: Int) {
         self.page += 1
-        
-        Network.shared.fetchRandomCatImages(page: self.page) { [weak self] (data) in
-            guard let self = self else { return }
-            
-            do {
-                let res = try JSONDecoder().decode([Cat].self, from: data)
-                self.catList.append(contentsOf: res)
-                self.imageCollectionView.reloadData()
-            } catch {
-                ProgressHUD.showFailed("Cannot load Cat images. Please try later.")
-            }
-        }
-    }
-}
-
-
-
-
-// MARK: - UICollectionView DataSource
-
-extension CatImagesViewController: UICollectionViewDataSource {
-    
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return catList.count
+        viewModel.fetchCatImage(page: self.page)
     }
     
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ImagesCollectionViewCell", for: indexPath) as! ImagesCollectionViewCell
-        
-        let target = catList[indexPath.item]
-        guard let urlStr = target.url else { return UICollectionViewCell() }
-        let url = URL(string: urlStr)
-        cell.catImageView.kf.setImage(with: url,
-                                      placeholder: UIImage(named: "zoo"),
-                                      options: [.transition(.fade(0.3))])
-        return cell
-    }
-}
-
-
-
-
-extension CatImagesViewController: UICollectionViewDelegate {
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        
-        alert(title: "알림", message: "즐겨찾기에 추가하시겠습니까?") { [weak self] _ in
-            guard let self = self else { return }
-            
-            let target = self.catList[indexPath.item]
-            guard let catId = target.id else { return }
-            Network.shared.postFavoriteImage(imageId: catId) { _ in }
-            ProgressHUD.showSuccess("즐겨찾기 추가 성공")
-        }
+    
+    /// Upload Image to Favorite folder
+    /// - Parameter imageId: selected imageId
+    private func uploadFavImage(imageId: String) {
+        viewModel.uploadFavImage(imageId: imageId)
     }
 }
 
@@ -162,6 +166,7 @@ extension CatImagesViewController: UICollectionViewDataSourcePrefetching {
         
         guard indexPaths.contains(where: { $0.row >= self.catList.count - 8 }) else { return }
         
-        getRandomPic(page: page)
+//        getRandomPic(page: page)
+        #warning("Todo: - 이미지 가져오기")
     }
 }
