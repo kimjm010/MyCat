@@ -8,6 +8,8 @@
 import UIKit
 import ProgressHUD
 import NSObject_Rx
+import RxSwift
+import RxCocoa
 
 
 class FavoriteViewController: UIViewController {
@@ -24,20 +26,18 @@ class FavoriteViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        fetchFavImages()
+        // Fetch favorite images
+        viewModel.fetchFavImages()
+        
         bindUI()
+        controlCollectionViewEvent()
         
         collectionView.rx.setDelegate(self)
             .disposed(by: rx.disposeBag)
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        
-        getFavImages()
-    }
     
-    
+    /// Bind ViewModel to ViewController
     private func bindUI() {
         viewModel.favoriteCatListSubject
             .bind(to: collectionView.rx.items(cellIdentifier: FavoriteCollectionViewCell.identifier, cellType: FavoriteCollectionViewCell.self)) { (row, favoriteCat, cell) in
@@ -50,73 +50,30 @@ class FavoriteViewController: UIViewController {
             .disposed(by: rx.disposeBag)
     }
     
-    private func fetchFavImages() {
-        viewModel.fetchFavImages()
-    }
     
-    
-    private func getFavImages() {
-        Network.shared.fetchFavoriteImages { [weak self] (data) in
-            guard let self = self else { return }
-            
-            do {
-                let result = try JSONDecoder().decode([FavoriteCat].self, from: data)
-                self.favCatList = result
-                self.collectionView.reloadData()
-            } catch {
-                #if DEBUG
-                print(error)
-                #endif
-            }
-        }
-    }
-}
-
-
-
-
-// MARK: - UICollectionView DataSource
-
-//extension FavoriteViewController: UICollectionViewDataSource {
-//
-//    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-//        return favCatList.count
-//    }
-//
-//
-//    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-//        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "FavoriteCollectionViewCell", for: indexPath) as! FavoriteCollectionViewCell
-//
-//        let target = favCatList[indexPath.item]
-//        guard let urlStr = target.image.url else { return UICollectionViewCell() }
-//        let url = URL(string: urlStr)
-//        cell.imageView.kf.setImage(with: url)
-//
-//        return cell
-//    }
-//}
-
-
-
-
-// MARK: - UICollectionView Delegate
-
-extension FavoriteViewController: UICollectionViewDelegate {
-    
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        
-        alert(title: "알림", message: "해당 이미지를 삭제하시겠습니까?") { [weak self] _ in
-            guard let self = self else { return }
-            let target = self.favCatList[indexPath.item]
-            guard let catId = target.id else { return }
-            
-            Network.shared.deleteFavoriteImage(imageId: catId) {
-                self.favCatList.remove(at: indexPath.item)
-                self.collectionView.deleteItems(at: [indexPath])
-            }
-            
-            ProgressHUD.showSuccess("이미지 삭제 완료")
-        }
+    private func controlCollectionViewEvent() {
+        collectionView.rx.modelSelected(FavoriteCat.self)
+            .subscribe(onNext: { [weak self] (favoriteCat) in
+                guard let self = self else { return }
+                self.viewModel.selectedImageSubject.onNext(favoriteCat)
+                self.alertDeleteToUser(title: "Alert",
+                                       message: "Do you want to delete selected favorite image?")
+                .observe(on: MainScheduler.instance)
+                .subscribe(onNext: {
+                    switch $0 {
+                    case .ok:
+                        guard let favoriteCatId = favoriteCat.id else { return }
+                        self.viewModel.imageActionSubject.onNext(.delete(favoriteCatId))
+                        ProgressHUD.showSuccess("Complete to delete selected image!")
+                        #warning("Todo: - 삭제 후 컬렉션뷰 리로드")
+                        //self.collectionView.reloadData()
+                    default:
+                        break
+                    }
+                })
+                .disposed(by: self.rx.disposeBag)
+            })
+            .disposed(by: rx.disposeBag)
     }
 }
 
@@ -124,7 +81,6 @@ extension FavoriteViewController: UICollectionViewDelegate {
 
 
 // MARK: - UICollectionView Delegate FlowLayout
-
 extension FavoriteViewController: UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {

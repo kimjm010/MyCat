@@ -230,20 +230,29 @@ class Network {
     /// - Parameter imageId: imageId
     /// - Returns: Empty Observable
     func deleteFavImage(imageId: Int) -> Observable<Void> {
-        let url = "v1/favourites/\(imageId)"
+        let url = "v1/favourites/"
         
-        guard let resultUrl = URL(string: baseURL + url) else { return Observable.empty() }
+        guard var resultUrl = URL(string: baseURL + url) else { return Observable.empty() }
+        resultUrl.appendPathComponent("\(imageId)", conformingTo: UTType.utf8PlainText)
         var urlRequest = URLRequest(url: resultUrl)
         urlRequest.method = .delete
         urlRequest.headers.add(.contentType("application/json"))
         urlRequest.headers.add(name: "x-api-key", value: apiKey as! String)
-
+        
+        
         return Observable.create { (observer) in
             RxAlamofire.request(urlRequest)
                 .debounce(.milliseconds(500), scheduler: MainScheduler.instance)
+                .debug()
                 .validate(statusCode: 200..<300)
+                .debug()
                 .subscribe(onNext: { _ in
+                    print(#fileID, #function, #line, "테스트 - deleteFavImage: \(imageId)")
                     observer.onNext(())
+                }, onError: { err in
+                    print(#fileID, #function, #line, "테스트 - onError \(err)")
+                }, onCompleted: {
+                    print(#fileID, #function, #line, "테스트 - onCompleted ")
                 })
                 .disposed(by: self.disposeBag)
             return Disposables.create()
