@@ -36,8 +36,11 @@ class CatImagesViewController: UIViewController {
         refreshControl.rx.controlEvent(.valueChanged)
             .subscribe(onNext: { [weak self] in
                 guard let self = self else { return }
-                print(#fileID, #function, #line, "- valueChanged: \($0)")
                 self.viewModel.refreshCatImages()
+                
+                if self.refreshControl.isRefreshing {
+                    self.refreshControl.endRefreshing()
+                }
             })
             .disposed(by: rx.disposeBag)
         
@@ -47,13 +50,13 @@ class CatImagesViewController: UIViewController {
             .subscribe(onNext: { [weak self] in
                 guard let self = self else { return }
                 if $0.count <= 6 {
-                    self.fetchCatImages(page: self.page)
+//                    self.fetchCatImages(page: self.page)
                 }
             })
             .disposed(by: rx.disposeBag)
         
         bindUI()
-        controllCollectionViewEvent()
+        controlCollectionViewEvent()
         
         imageCollectionView.rx.setDelegate(self)
             .disposed(by: rx.disposeBag)
@@ -76,7 +79,7 @@ class CatImagesViewController: UIViewController {
     
     /// Control ImageCollectionView Select Event
     /// Ask whether add to favorite folder
-    private func controllCollectionViewEvent() {
+    private func controlCollectionViewEvent() {
         imageCollectionView.rx.modelSelected(Cat.self)
             .subscribe(onNext: { [weak self] (cat) in
                 guard let self = self else { return }

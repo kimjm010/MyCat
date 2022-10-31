@@ -16,13 +16,25 @@ import UIKit
 
 class FavoriteViewModel {
     
+    // Favorite ViewModel Actions
+    enum FavoriteAction {
+        case delete(_ imageId: Int)
+    }
+    
     private let disposeBag = DisposeBag()
     
     // MARK: - Inputs
-    let selectedImageSubject = BehaviorSubject<FavoriteCat?>(value: nil)
+    let selectedImageSubject = PublishSubject<FavoriteCat>()
+    let imageActionSubject = PublishSubject<FavoriteAction>()
     
     // MARK: - Outputs
     var favoriteCatListSubject = BehaviorSubject<[FavoriteCat]>(value: [])
+    
+    init() {
+        imageActionSubject
+            .bind(onNext: handleFavoriteAction(_:))
+            .disposed(by: disposeBag)
+    }
     
     
     /// Fetch Favorite Cat Images
@@ -42,12 +54,22 @@ class FavoriteViewModel {
     }
     
     
+    /// Handle Favorite Action
+    /// - Parameter action: FavoriteAction
+    fileprivate func handleFavoriteAction(_ action: FavoriteAction) {
+        switch action {
+        case .delete(let imageId):
+            deleteFavCatImage(imageId: imageId)
+        }
+    }
+    
+    
     /// Delete favorite image
     /// - Parameter imageId: image Id
-    func deleteFavCatImage(imageId: Int) {
+    fileprivate func deleteFavCatImage(imageId: Int) {
         Network.shared.deleteFavImage(imageId: imageId)
-            .subscribe { _ in
-                print(#fileID, #function, #line, "- ")
+            .subscribe {
+                print(#fileID, #function, #line, "-deleteFavCatImage \(imageId) \($0)")
             }
             .disposed(by: disposeBag)
     }
