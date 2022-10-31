@@ -34,6 +34,8 @@ class FavoriteViewModel {
         imageActionSubject
             .bind(onNext: handleFavoriteAction(_:))
             .disposed(by: disposeBag)
+        
+        fetchFavImages()
     }
     
     

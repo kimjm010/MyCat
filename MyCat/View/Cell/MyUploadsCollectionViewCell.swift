@@ -9,5 +9,9 @@ import UIKit
 
 class MyUploadsCollectionViewCell: UICollectionViewCell {
     
+    // MARK: - IBOutlets
     @IBOutlet weak var imageView: UIImageView!
+    
+    // MARK: - Vars
+    static let identifier = "MyUploadsCollectionViewCell"
 }
