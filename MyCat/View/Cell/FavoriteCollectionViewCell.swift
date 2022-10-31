@@ -11,4 +11,7 @@ class FavoriteCollectionViewCell: UICollectionViewCell {
     
     // MARK: - IBOutlets
     @IBOutlet weak var imageView: UIImageView!
+    
+    // MARK: - Vars
+    static let identifier = "FavoriteCollectionViewCell"
 }

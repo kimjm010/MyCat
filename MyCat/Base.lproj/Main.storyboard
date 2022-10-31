@@ -53,8 +53,6 @@
                                     </collectionViewCell>
                                 </cells>
                                 <connections>
-                                    <outlet property="dataSource" destination="GSh-Ca-fy7" id="PSn-zp-tVZ"/>
-                                    <outlet property="delegate" destination="GSh-Ca-fy7" id="Ojb-Tx-THd"/>
                                     <outlet property="prefetchDataSource" destination="GSh-Ca-fy7" id="goM-Ru-BxF"/>
                                 </connections>
                             </collectionView>

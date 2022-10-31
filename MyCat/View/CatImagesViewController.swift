@@ -46,7 +46,6 @@ class CatImagesViewController: UIViewController {
             .map { $0.map { $0.count} }
             .subscribe(onNext: { [weak self] in
                 guard let self = self else { return }
-                print(#fileID, #function, #line, "- \($0)")
                 if $0.count <= 6 {
                     self.fetchCatImages(page: self.page)
                 }

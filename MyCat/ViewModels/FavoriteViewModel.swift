@@ -19,7 +19,7 @@ class FavoriteViewModel {
     private let disposeBag = DisposeBag()
     
     // MARK: - Inputs
-    
+    let selectedImageSubject = BehaviorSubject<FavoriteCat?>(value: nil)
     
     // MARK: - Outputs
     var favoriteCatListSubject = BehaviorSubject<[FavoriteCat]>(value: [])
@@ -42,7 +42,13 @@ class FavoriteViewModel {
     }
     
     
-    func deleteFavCatImage() {
-    
+    /// Delete favorite image
+    /// - Parameter imageId: image Id
+    func deleteFavCatImage(imageId: Int) {
+        Network.shared.deleteFavImage(imageId: imageId)
+            .subscribe { _ in
+                print(#fileID, #function, #line, "- ")
+            }
+            .disposed(by: disposeBag)
     }
 }
