@@ -237,9 +237,6 @@
                                         </connections>
                                     </collectionViewCell>
                                 </cells>
-                                <connections>
-                                    <outlet property="prefetchDataSource" destination="tPE-3R-WQz" id="nSq-C5-fOi"/>
-                                </connections>
                             </collectionView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="pcR-jO-c86"/>
