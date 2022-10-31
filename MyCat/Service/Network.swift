@@ -166,30 +166,7 @@ class Network {
     }
     
     
-    #warning("Todo: - 여기서 Add누르면 즐겨찾기 이미지 등록하도록 구현할 것!")
     // MARK: - Post Favorite Image
-    
-//    func postFavoriteImage(imageId: String, completion: @escaping (_ result: Data) -> Void) {
-//        let url = "v1/favourites"
-//        let headers: HTTPHeaders = [
-//            "Content-Type": "application/json",
-//            "x-api-key": apiKey as! String
-//        ]
-//
-//        let parameters: [String: String] = [
-//            "image_id": "\(imageId)"
-//        ]
-//
-//        AF.request(baseURL + url, method: .post, parameters: parameters, encoder: JSONParameterEncoder.default, headers: headers)
-//            .responseData { (response) in
-//                switch response.result {
-//                case .success(_):
-//                    completion(response.data!)
-//                case .failure(let error):
-//                    ProgressHUD.showFailed("Fail to upload favorite cat image. Please try again later.\n \(error.localizedDescription)")
-//                }
-//            }
-//    }
     
     func uploadFavoriteImage(imageId: String) -> Observable<Data?> {
         let url = "v1/favourites"
