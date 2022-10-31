@@ -19,15 +19,10 @@ class FavoriteViewController: UIViewController {
     
     // MARK: - Vars
     private let viewModel = FavoriteViewModel()
-    var favCatList = [FavoriteCat]()
 
     // MARK: - View Life Cycle
-    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        // Fetch favorite images
-        viewModel.fetchFavImages()
         
         bindUI()
         controlCollectionViewEvent()
@@ -51,6 +46,7 @@ class FavoriteViewController: UIViewController {
     }
     
     
+    /// Control CollectionView Select Event
     private func controlCollectionViewEvent() {
         collectionView.rx.modelSelected(FavoriteCat.self)
             .subscribe(onNext: { [weak self] (favoriteCat) in
@@ -83,6 +79,12 @@ class FavoriteViewController: UIViewController {
 // MARK: - UICollectionView Delegate FlowLayout
 extension FavoriteViewController: UICollectionViewDelegateFlowLayout {
     
+    /// Set  CollectionView Cell Size
+    /// - Parameters:
+    ///   - collectionView: CollectionView
+    ///   - collectionViewLayout: CollectionView layout object
+    ///   - indexPath: CollectionView's indexPath
+    /// - Returns: CGSize of CollectionView Cell
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         guard let layout = collectionViewLayout as? UICollectionViewFlowLayout else { return .zero }
         

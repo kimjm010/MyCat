@@ -93,27 +93,36 @@ class Network {
     }
     
     
-    // MARK: - Fetch Favorite Images
-    
-    func fetchFavoriteImages(completion: @escaping (_ result: Data) -> Void) {
-        let url = "v1/favourites"
+    func fetchUploadedImages() -> Observable<Data?> {
+        let url = "v1/images/?limit=100"
         let headers: HTTPHeaders = [
             "Content-Type": "application/json",
             "x-api-key": apiKey as! String
         ]
         
-        AF.request(baseURL + url, method: .get, headers: headers)
-            .responseDecodable(of: [FavoriteCat].self, completionHandler: { (response) in
-                switch response.result {
-                case .success(_):
-                    completion(response.data!)
-                case .failure(let error):
-                    ProgressHUD.showFailed("Fail to get favorite cat image. Please try again later.\n \(error.localizedDescription)")
-                }
-            })
+        return Observable.create { (observer) in
+            RxAlamofire
+                .requestData(.get, self.baseURL + url, headers: headers)
+                .debounce(.milliseconds(500), scheduler: MainScheduler.instance)
+                .debug()
+                .subscribe(onNext: {
+                    print(#fileID, #function, #line, "- fetchUploadedImages: \($0) \($1)")
+                    observer.onNext($1)
+                }, onError: { err in
+                    ProgressHUD.showFailed(err.localizedDescription)
+                    print(#fileID, #function, #line, "- \(err.localizedDescription)")
+                })
+                .disposed(by: self.disposeBag)
+            
+            return Disposables.create()
+        }
     }
     
     
+    // MARK: - Fetch Favorite Images
+    
+    /// Fetch Favorite Images
+    /// - Returns: Data Observable
     func fetchFavImages() -> Observable<Data> {
         let url = "v1/favourites"
         let headers: HTTPHeaders = [
@@ -204,28 +213,6 @@ class Network {
     
     // MARK: - Delete Favorite Image
     
-    func deleteFavoriteImage(imageId: Int, completion: @escaping () -> Void) {
-        let url = "v1/favourites/\(imageId)"
-        print(#fileID, #function, #line, "- \(baseURL)\(url)")
-        
-        let headers: HTTPHeaders = [
-            "Content-Type": "application/json",
-            "x-api-key": apiKey as! String
-        ]
-        
-        
-        AF.request(baseURL + url, method: .delete, headers: headers)
-            .responseData(completionHandler: { (response) in
-                switch response.result {
-                case .success(_):
-                    completion()
-                case .failure(let error):
-                    ProgressHUD.showFailed("Fail to delete favorite cate image. Please try again later.\n \(error.localizedDescription)")
-                }
-            })
-    }
-    
-    
     /// Delete Favorite Image
     /// - Parameter imageId: imageId
     /// - Returns: Empty Observable
@@ -249,10 +236,6 @@ class Network {
                 .subscribe(onNext: { _ in
                     print(#fileID, #function, #line, "테스트 - deleteFavImage: \(imageId)")
                     observer.onNext(())
-                }, onError: { err in
-                    print(#fileID, #function, #line, "테스트 - onError \(err)")
-                }, onCompleted: {
-                    print(#fileID, #function, #line, "테스트 - onCompleted ")
                 })
                 .disposed(by: self.disposeBag)
             return Disposables.create()

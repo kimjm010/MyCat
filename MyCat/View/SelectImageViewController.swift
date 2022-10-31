@@ -38,9 +38,9 @@ class SelectImageViewController: UIViewController {
     private func createBarButton() {
         let uploadBarButton = UIBarButtonItem(title: "Upload", style: .plain, target: self, action: #selector(uploadCatImage))
         let imageSelectBarButton = UIBarButtonItem(title: "Image", style: .plain, target: self, action: #selector(selectImage))
-        let closeButton = UIBarButtonItem(title: "Close", style: .done, target: self, action: #selector(closeVC))
+//        let closeButton = UIBarButtonItem(title: "Close", style: .done, target: self, action: #selector(closeVC))
         navigationItem.rightBarButtonItems = [uploadBarButton, imageSelectBarButton]
-        navigationItem.leftBarButtonItem = closeButton
+//        navigationItem.leftBarButtonItem = closeButton
     }
     
     
@@ -55,9 +55,8 @@ class SelectImageViewController: UIViewController {
         guard let imageData = selectedImage?.pngData() else { return }
         Network.shared.postMyCatImage(imageData: imageData) { [weak self] in
             guard let self = self else { return }
-            
             ProgressHUD.showSuccess("고양이 이미지가 정상적으로 등록되었습니다 :)")
-            self.dismiss(animated: true, completion: nil)
+            self.navigationController?.popViewController(animated: true)
         }
     }
     

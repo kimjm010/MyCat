@@ -118,8 +118,6 @@
                                     </collectionViewCell>
                                 </cells>
                                 <connections>
-                                    <outlet property="dataSource" destination="maD-Fh-QR4" id="glh-qg-6YH"/>
-                                    <outlet property="delegate" destination="maD-Fh-QR4" id="0g8-yH-d6P"/>
                                     <outlet property="prefetchDataSource" destination="maD-Fh-QR4" id="BQG-Be-wiS"/>
                                 </connections>
                             </collectionView>

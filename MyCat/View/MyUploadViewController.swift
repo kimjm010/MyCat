@@ -7,33 +7,50 @@
 
 import UIKit
 import ProgressHUD
+import RxSwift
+import RxCocoa
+import NSObject_Rx
+import Kingfisher
 
 
 class MyUploadViewController: UIViewController {
     
     // MARK: - IBOutlets
-    
     @IBOutlet weak var collectionView: UICollectionView!
     
-    
     // MARK: - Vars
-    
+    private let viewModel = UploadViewModel()
     var catList = [Cat]()
-    
     static var reloadData: (() -> Void)?
     
-    
     // MARK: - View Life Cycle
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
+    override func viewDidLoad() {
+        super.viewDidLoad()
         
         getUPloadedImages()
+        bindUI()
+        
+        collectionView.rx.setDelegate(self)
+            .disposed(by: rx.disposeBag)
+    }
+    
+    
+    /// Bind ViewModel Subject to CollectionView
+    private func bindUI() {
+        viewModel.uploadedCatListSubject
+            .bind(to: collectionView.rx.items(cellIdentifier: MyUploadsCollectionViewCell.identifier, cellType: MyUploadsCollectionViewCell.self)) { (row, uploadedImage, cell) in
+                
+                guard let imageUrlStr = uploadedImage.url else { return }
+                let url = URL(string: imageUrlStr)
+                cell.imageView.kf.setImage(with: url,
+                                           placeholder: UIImage(named: "zoo"),
+                                           options: [.transition(.fade(0.3))])
+            }
+            .disposed(by: rx.disposeBag)
     }
     
     
     // MARK: - Get Upload Images
-    
     private func getUPloadedImages() {
         Network.shared.fetchMyUploadImages { [weak self] (data) in
             guard let self = self else { return }
@@ -56,27 +73,27 @@ class MyUploadViewController: UIViewController {
 
 
 
-// MARK: - UICollectionView DataSource
-
-extension MyUploadViewController: UICollectionViewDataSource {
-
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return catList.count
-    }
-
-    
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "MyUploadsCollectionViewCell",
-                                                      for: indexPath) as! MyUploadsCollectionViewCell
-        
-        let target = catList[indexPath.item]
-        guard let imageUrlStr = target.url else { return UICollectionViewCell() }
-        let url = URL(string: imageUrlStr)
-        cell.imageView.kf.setImage(with: url)
-        
-        return cell
-    }
-}
+//// MARK: - UICollectionView DataSource
+//
+//extension MyUploadViewController: UICollectionViewDataSource {
+//
+//    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+//        return catList.count
+//    }
+//
+//
+//    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+//        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "MyUploadsCollectionViewCell",
+//                                                      for: indexPath) as! MyUploadsCollectionViewCell
+//
+//        let target = catList[indexPath.item]
+//        guard let imageUrlStr = target.url else { return UICollectionViewCell() }
+//        let url = URL(string: imageUrlStr)
+//        cell.imageView.kf.setImage(with: url)
+//
+//        return cell
+//    }
+//}
 
 
 
@@ -97,6 +114,7 @@ extension MyUploadViewController: UICollectionViewDelegate {
             }
             
             ProgressHUD.showSuccess("이미지가 삭제되었습니다.")
+            #warning("Todo: - 삭제 후 collection reload기능 확인!")
         }
     }
 }
