@@ -11,9 +11,9 @@ import Alamofire
 
 class ImagesCollectionViewCell: UICollectionViewCell {
     
-    static let identifier = "ImagesCollectionViewCell"
-    
     // MARK: - IBOutlets
-    
     @IBOutlet weak var catImageView: UIImageView!
+    
+    // MARK: - Vars
+    static let identifier = "ImagesCollectionViewCell"
 }

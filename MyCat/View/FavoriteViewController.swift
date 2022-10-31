@@ -7,26 +7,51 @@
 
 import UIKit
 import ProgressHUD
+import NSObject_Rx
 
 
 class FavoriteViewController: UIViewController {
     
     // MARK: - IBOutlets
-    
     @IBOutlet weak var collectionView: UICollectionView!
     
-    
     // MARK: - Vars
-    
+    private let viewModel = FavoriteViewModel()
     var favCatList = [FavoriteCat]()
-    
 
     // MARK: - View Life Cycle
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        fetchFavImages()
+        bindUI()
+        
+        collectionView.rx.setDelegate(self)
+            .disposed(by: rx.disposeBag)
+    }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
         getFavImages()
+    }
+    
+    
+    private func bindUI() {
+        viewModel.favoriteCatListSubject
+            .bind(to: collectionView.rx.items(cellIdentifier: FavoriteCollectionViewCell.identifier, cellType: FavoriteCollectionViewCell.self)) { (row, favoriteCat, cell) in
+                guard let urlStr = favoriteCat.image.url else { return }
+                let url = URL(string: urlStr)
+                cell.imageView.kf.setImage(with: url,
+                                           placeholder: UIImage(named: "zoo"),
+                                           options: [.transition(.fade(0.3))])
+            }
+            .disposed(by: rx.disposeBag)
+    }
+    
+    private func fetchFavImages() {
+        viewModel.fetchFavImages()
     }
     
     
@@ -52,24 +77,24 @@ class FavoriteViewController: UIViewController {
 
 // MARK: - UICollectionView DataSource
 
-extension FavoriteViewController: UICollectionViewDataSource {
-    
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return favCatList.count
-    }
-    
-    
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "FavoriteCollectionViewCell", for: indexPath) as! FavoriteCollectionViewCell
-        
-        let target = favCatList[indexPath.item]
-        guard let urlStr = target.image.url else { return UICollectionViewCell() }
-        let url = URL(string: urlStr)
-        cell.imageView.kf.setImage(with: url)
-        
-        return cell
-    }
-}
+//extension FavoriteViewController: UICollectionViewDataSource {
+//
+//    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+//        return favCatList.count
+//    }
+//
+//
+//    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+//        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "FavoriteCollectionViewCell", for: indexPath) as! FavoriteCollectionViewCell
+//
+//        let target = favCatList[indexPath.item]
+//        guard let urlStr = target.image.url else { return UICollectionViewCell() }
+//        let url = URL(string: urlStr)
+//        cell.imageView.kf.setImage(with: url)
+//
+//        return cell
+//    }
+//}
 
 
 

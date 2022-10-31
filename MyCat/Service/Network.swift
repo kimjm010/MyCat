@@ -191,9 +191,7 @@ class Network {
             
             RxAlamofire.request(urlRequst)
                 .debounce(.milliseconds(500), scheduler: MainScheduler.instance)
-                .debug()
                 .validate(statusCode: 200..<300)
-                .debug()
                 .subscribe(onNext: {
                     print(#fileID, #function, #line, "- uploadFavoriteImage \($0)")
                     observer.onNext(nil)
@@ -225,6 +223,31 @@ class Network {
                     ProgressHUD.showFailed("Fail to delete favorite cate image. Please try again later.\n \(error.localizedDescription)")
                 }
             })
+    }
+    
+    
+    /// Delete Favorite Image
+    /// - Parameter imageId: imageId
+    /// - Returns: Empty Observable
+    func deleteFavImage(imageId: Int) -> Observable<Void> {
+        let url = "v1/favourites/\(imageId)"
+        
+        guard let resultUrl = URL(string: baseURL + url) else { return Observable.empty() }
+        var urlRequest = URLRequest(url: resultUrl)
+        urlRequest.method = .delete
+        urlRequest.headers.add(.contentType("application/json"))
+        urlRequest.headers.add(name: "x-api-key", value: apiKey as! String)
+
+        return Observable.create { (observer) in
+            RxAlamofire.request(urlRequest)
+                .debounce(.milliseconds(500), scheduler: MainScheduler.instance)
+                .validate(statusCode: 200..<300)
+                .subscribe(onNext: { _ in
+                    observer.onNext(())
+                })
+                .disposed(by: self.disposeBag)
+            return Disposables.create()
+        }
     }
     
     
