@@ -51,10 +51,8 @@ class FavoriteViewController: UIViewController {
         collectionView.rx.modelSelected(FavoriteCat.self)
             .subscribe(onNext: { [weak self] (favoriteCat) in
                 guard let self = self else { return }
-                self.viewModel.selectedImageSubject.onNext(favoriteCat)
                 self.alertDeleteToUser(title: "Alert",
                                        message: "Do you want to delete selected favorite image?")
-                .observe(on: MainScheduler.instance)
                 .subscribe(onNext: {
                     switch $0 {
                     case .ok:

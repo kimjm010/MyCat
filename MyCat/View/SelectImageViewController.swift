@@ -5,28 +5,26 @@
 //  Created by Chris Kim on 9/13/22.
 //
 
-import UIKit
-import Gallery
-import Alamofire
 import ProgressHUD
+import NSObject_Rx
+import Gallery
+import RxCocoa
+import RxSwift
 
 
 class SelectImageViewController: UIViewController {
     
     // MARK: - IBOutlets
-    
     @IBOutlet weak var imageView: UIImageView!
     
     
     // MARK: - Vars
-    
+    private let viewModel = SelectImageViewModel()
     var gallery: GalleryController!
-    
     var selectedImage: UIImage?
     
     
     // MARK: - View Life Cycle
-    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -38,26 +36,17 @@ class SelectImageViewController: UIViewController {
     private func createBarButton() {
         let uploadBarButton = UIBarButtonItem(title: "Upload", style: .plain, target: self, action: #selector(uploadCatImage))
         let imageSelectBarButton = UIBarButtonItem(title: "Image", style: .plain, target: self, action: #selector(selectImage))
-//        let closeButton = UIBarButtonItem(title: "Close", style: .done, target: self, action: #selector(closeVC))
         navigationItem.rightBarButtonItems = [uploadBarButton, imageSelectBarButton]
-//        navigationItem.leftBarButtonItem = closeButton
-    }
-    
-    
-    /// close ViewController
-    @objc private func closeVC() {
-        dismiss(animated: true, completion: nil)
     }
     
     
     /// Upload Cat Image
     @objc private func uploadCatImage() {
         guard let imageData = selectedImage?.pngData() else { return }
-        Network.shared.postMyCatImage(imageData: imageData) { [weak self] in
-            guard let self = self else { return }
-            ProgressHUD.showSuccess("고양이 이미지가 정상적으로 등록되었습니다 :)")
-            self.navigationController?.popViewController(animated: true)
-        }
+        viewModel.selectImageActionSubject.onNext(.upload(imageData))
+        ProgressHUD.showSuccess("고양이 이미지가 정상적으로 등록되었습니다 :)")
+        self.navigationController?.popViewController(animated: true)
+        #warning("Todo: - pop하면서 컬렉션뷰 리로드")
     }
     
     

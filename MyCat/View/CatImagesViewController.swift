@@ -5,11 +5,9 @@
 //  Created by Chris Kim on 9/13/22.
 //
 
-import UIKit
-import Alamofire
-import Kingfisher
-import ProgressHUD
 import NSObject_Rx
+import ProgressHUD
+import Kingfisher
 import RxCocoa
 import RxSwift
 
@@ -23,7 +21,6 @@ class CatImagesViewController: UIViewController {
     private let viewModel = CatImagesViewModel()
     private var refreshControl = UIRefreshControl()
     var page = 0
-    
     
     // MARK: - View Life Cycle
     override func viewDidLoad() {
@@ -83,7 +80,6 @@ class CatImagesViewController: UIViewController {
         imageCollectionView.rx.modelSelected(Cat.self)
             .subscribe(onNext: { [weak self] (cat) in
                 guard let self = self else { return }
-                self.viewModel.selectedImageSubject.onNext(cat)
                 self.alertToUser(title: "Alert",
                                  message: "Do you want to add in favorite image folder?")
                     .subscribe(onNext: {
