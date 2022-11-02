@@ -14,9 +14,9 @@
 		F521182D28CF84E900A32CD9 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F521182B28CF84E900A32CD9 /* Main.storyboard */; };
 		F521182F28CF84EB00A32CD9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F521182E28CF84EB00A32CD9 /* Assets.xcassets */; };
 		F521183228CF84EB00A32CD9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F521183028CF84EB00A32CD9 /* LaunchScreen.storyboard */; };
-		F555656428E71FC400C81339 /* NSNotificationName+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F555656328E71FC400C81339 /* NSNotificationName+Extension.swift */; };
 		F55F242629069EF000A5417B /* CatImagesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F55F242529069EF000A5417B /* CatImagesViewModel.swift */; };
 		F55F246F290BCD8B00A5417B /* UIViewController+RxAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = F55F246E290BCD8B00A5417B /* UIViewController+RxAlert.swift */; };
+		F563C3DA29123FA700CC91F4 /* SelectImageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F563C3D929123FA700CC91F4 /* SelectImageViewModel.swift */; };
 		F58E771828EBF6FA00C58E9D /* Config.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = F58E771728EBF6FA00C58E9D /* Config.xcconfig */; };
 		F59C878828CF8F20000443C5 /* Cat.swift in Sources */ = {isa = PBXBuildFile; fileRef = F59C878728CF8F20000443C5 /* Cat.swift */; };
 		F59C878C28D00594000443C5 /* CatImagesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F59C878B28D00594000443C5 /* CatImagesViewController.swift */; };
@@ -26,7 +26,6 @@
 		F59C87A928D054FA000443C5 /* Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = F59C87A828D054FA000443C5 /* Network.swift */; };
 		F59C87AB28D07714000443C5 /* SelectImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F59C87AA28D07714000443C5 /* SelectImageViewController.swift */; };
 		F59C87AD28D0CC00000443C5 /* MyUploadsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F59C87AC28D0CC00000443C5 /* MyUploadsCollectionViewCell.swift */; };
-		F59C87B028D15D3A000443C5 /* UIVIewController+Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = F59C87AF28D15D3A000443C5 /* UIVIewController+Alert.swift */; };
 		F59C87B428D1AD82000443C5 /* FavoriteCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F59C87B328D1AD82000443C5 /* FavoriteCollectionViewCell.swift */; };
 		F5B9755B290FE4C000DA69D8 /* APILogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5B9755A290FE4C000DA69D8 /* APILogger.swift */; };
 		F5B9755D2910191E00DA69D8 /* UploadViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5B9755C2910191E00DA69D8 /* UploadViewModel.swift */; };
@@ -45,9 +44,9 @@
 		F521182E28CF84EB00A32CD9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		F521183128CF84EB00A32CD9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		F521183328CF84EB00A32CD9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		F555656328E71FC400C81339 /* NSNotificationName+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSNotificationName+Extension.swift"; sourceTree = "<group>"; };
 		F55F242529069EF000A5417B /* CatImagesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CatImagesViewModel.swift; sourceTree = "<group>"; };
 		F55F246E290BCD8B00A5417B /* UIViewController+RxAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+RxAlert.swift"; sourceTree = "<group>"; };
+		F563C3D929123FA700CC91F4 /* SelectImageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectImageViewModel.swift; sourceTree = "<group>"; };
 		F58E771728EBF6FA00C58E9D /* Config.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Config.xcconfig; sourceTree = "<group>"; };
 		F59C878728CF8F20000443C5 /* Cat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cat.swift; sourceTree = "<group>"; };
 		F59C878B28D00594000443C5 /* CatImagesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CatImagesViewController.swift; sourceTree = "<group>"; };
@@ -57,7 +56,6 @@
 		F59C87A828D054FA000443C5 /* Network.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Network.swift; sourceTree = "<group>"; };
 		F59C87AA28D07714000443C5 /* SelectImageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectImageViewController.swift; sourceTree = "<group>"; };
 		F59C87AC28D0CC00000443C5 /* MyUploadsCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyUploadsCollectionViewCell.swift; sourceTree = "<group>"; };
-		F59C87AF28D15D3A000443C5 /* UIVIewController+Alert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIVIewController+Alert.swift"; sourceTree = "<group>"; };
 		F59C87B328D1AD82000443C5 /* FavoriteCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteCollectionViewCell.swift; sourceTree = "<group>"; };
 		F5B9755A290FE4C000DA69D8 /* APILogger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APILogger.swift; sourceTree = "<group>"; };
 		F5B9755C2910191E00DA69D8 /* UploadViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadViewModel.swift; sourceTree = "<group>"; };
@@ -127,6 +125,7 @@
 				F55F242529069EF000A5417B /* CatImagesViewModel.swift */,
 				F5122348290E972200001A9A /* FavoriteViewModel.swift */,
 				F5B9755C2910191E00DA69D8 /* UploadViewModel.swift */,
+				F563C3D929123FA700CC91F4 /* SelectImageViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -174,8 +173,6 @@
 		F59C87AE28D15D2D000443C5 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
-				F59C87AF28D15D3A000443C5 /* UIVIewController+Alert.swift */,
-				F555656328E71FC400C81339 /* NSNotificationName+Extension.swift */,
 				F55F246E290BCD8B00A5417B /* UIViewController+RxAlert.swift */,
 			);
 			path = Extensions;
@@ -308,15 +305,14 @@
 			files = (
 				F5B9755B290FE4C000DA69D8 /* APILogger.swift in Sources */,
 				F59C87B428D1AD82000443C5 /* FavoriteCollectionViewCell.swift in Sources */,
-				F59C87B028D15D3A000443C5 /* UIVIewController+Alert.swift in Sources */,
 				F59C878828CF8F20000443C5 /* Cat.swift in Sources */,
+				F563C3DA29123FA700CC91F4 /* SelectImageViewModel.swift in Sources */,
 				F55F246F290BCD8B00A5417B /* UIViewController+RxAlert.swift in Sources */,
 				F59C87A928D054FA000443C5 /* Network.swift in Sources */,
 				F521182628CF84E900A32CD9 /* AppDelegate.swift in Sources */,
 				F59C879028D005AF000443C5 /* MyUploadViewController.swift in Sources */,
 				F5EF3D2628D4379C00A66655 /* FavoriteCate.swift in Sources */,
 				F521182828CF84E900A32CD9 /* SceneDelegate.swift in Sources */,
-				F555656428E71FC400C81339 /* NSNotificationName+Extension.swift in Sources */,
 				F55F242629069EF000A5417B /* CatImagesViewModel.swift in Sources */,
 				F59C87AB28D07714000443C5 /* SelectImageViewController.swift in Sources */,
 				F59C878E28D005A0000443C5 /* FavoriteViewController.swift in Sources */,

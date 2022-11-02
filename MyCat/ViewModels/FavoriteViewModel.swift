@@ -5,37 +5,34 @@
 //  Created by Chris Kim on 10/30/22.
 //
 
-import NSObject_Rx
 import ProgressHUD
-import Kingfisher
-import Alamofire
 import RxCocoa
 import RxSwift
-import UIKit
 
 
 class FavoriteViewModel {
     
-    // Favorite ViewModel Actions
+    // MARK: - Favorite ViewModel Actions
     enum FavoriteAction {
         case delete(_ imageId: Int)
     }
     
-    private let disposeBag = DisposeBag()
-    
     // MARK: - Inputs
-    let selectedImageSubject = PublishSubject<FavoriteCat>()
     let imageActionSubject = PublishSubject<FavoriteAction>()
     
     // MARK: - Outputs
     var favoriteCatListSubject = BehaviorSubject<[FavoriteCat]>(value: [])
     
+    // MARK: - Vars
+    private let disposeBag = DisposeBag()
+    
+    // MARK: - Initializer
     init() {
+        fetchFavImages()
+        
         imageActionSubject
             .bind(onNext: handleFavoriteAction(_:))
             .disposed(by: disposeBag)
-        
-        fetchFavImages()
     }
     
     

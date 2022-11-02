@@ -5,25 +5,20 @@
 //  Created by Chris Kim on 10/31/22.
 //
 
-import NSObject_Rx
 import ProgressHUD
-import Alamofire
 import RxCocoa
 import RxSwift
-import UIKit
 
 
 class UploadViewModel {
     
     // MARK: - Upload Action
-    enum UploadAction {
-        case upload(_ imageData: Data)
-        case fetch
+    enum ImageAction {
+        case delete(_ imageId: String)
     }
     
     // MARK: - Inputs
-    let selectedImageSubject = PublishSubject<Cat>()
-    let imageActionSubject = PublishSubject<UploadAction>()
+    let imageActionSubject = PublishSubject<ImageAction>()
     
     // MARK: - Outputs
     var uploadedCatListSubject = BehaviorSubject<[Cat]>(value: [])
@@ -34,7 +29,10 @@ class UploadViewModel {
     // MARK: - Initializer
     init() {
         fetchUploadedImages()
-        uploadImage()
+        
+        imageActionSubject
+            .bind(onNext: handleUploadAction(_:))
+            .disposed(by: disposeBag)
     }
     
     
@@ -56,7 +54,23 @@ class UploadViewModel {
     }
     
     
-    fileprivate func uploadImage() {
-        
+    /// Handle upload action
+    /// - Parameter action: UploadAction
+    fileprivate func handleUploadAction(_ action: ImageAction) {
+        switch action {
+        case .delete(let imageId):
+            deleteImage(imageId: imageId)
+        }
+    }
+    
+    
+    /// Delete Cat Image
+    /// - Parameter imageId: image Id
+    fileprivate func deleteImage(imageId: String) {
+        Network.shared.deleteCatImage(imageId: imageId)
+            .subscribe(onNext: { 
+                print(#fileID, #function, #line, "-deleteFavCatImage \(imageId) \($0)")
+            })
+            .disposed(by: disposeBag)
     }
 }

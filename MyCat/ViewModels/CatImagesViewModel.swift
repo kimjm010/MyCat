@@ -6,25 +6,19 @@
 //
 
 import ProgressHUD
-import RxAlamofire
-import Foundation
 import RxSwift
 import RxCocoa
-import UIKit
 
 
 class CatImagesViewModel {
     
-    private let disposeBag = DisposeBag()
-    
-    // MARK: - Inputs from ViewController
-    let selectedImageSubject = PublishSubject<Cat>()
-    
     // MARK: - Outputs to ViewController
     var catImagesSubject = BehaviorSubject<[Cat]>(value: [])
     
-    var catImageList: Driver<[Cat]>!
-        
+    // MARK: - Vars
+    private let disposeBag = DisposeBag()
+    
+    
     /// Fetch cat images
     /// - Parameter page: page value
     func fetchCatImage(page: Int) {
