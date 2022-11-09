@@ -24,6 +24,12 @@ class MyUploadViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        #if DEBUG
+        Network.shared.fetchMyUploadImages { (catList) in
+            print(#fileID, #function, #line, "-fetchMyUploadImages: \(catList.count)")
+        }
+        #endif
+        
         bindUI()
         controlCollectionViewEvent()
         

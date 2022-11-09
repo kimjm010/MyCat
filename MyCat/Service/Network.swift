@@ -54,6 +54,28 @@ class Network {
     }
     
     
+    // MARK: - Feth My Upload Images
+    /// Fetch Uploaded Images
+    /// - Parameter completion: completion handler
+    func fetchMyUploadImages(completion: @escaping ([Cat]) -> (Void)) {
+        let url = "v1/images/"
+        let params: [String: String] = ["limit": "100"]
+        let headers: HTTPHeaders = [
+            "Content-Type": "application/json",
+            "x-api-key": apiKey as! String
+        ]
+        
+        AF.request(baseURL + url, method: .get, parameters: params, encoder: URLEncodedFormParameterEncoder(destination: .queryString), headers: headers).responseDecodable(of: [Cat].self) { (response) in
+            switch response.result {
+            case .success(let catList):
+                completion(catList)
+            case .failure(let error):
+                print(error.localizedDescription, "**")
+            }
+        }
+    }
+    
+    
     // MARK: - Fetch My Uploaded Images
     /// Fetch Uploaded Images
     /// - Returns: Data Observable
@@ -102,37 +124,6 @@ class Network {
     }
     
     
-    // MARK: - Post Cat Image
-    
-    func postMyCatImage(imageData: Data, completion: @escaping () -> Void) {
-        let url = "v1/images/upload"
-        let headers: HTTPHeaders = [
-            "Content-Type": "multipart/form-data",
-            "x-api-key": apiKey as! String
-        ]
-        
-        let multipartEncoding: (MultipartFormData) -> Void = { multipartFormData in
-            
-            multipartFormData.append(imageData,
-                                     withName: "file",
-                                     fileName: "\(Date().timeIntervalSince1970).png",
-                                     mimeType: "image/png")
-        }
-        
-        
-        AF.upload(multipartFormData: multipartEncoding, to: baseURL + url, method: .post, headers: headers)
-            .responseDecodable(of: Cat.self) { (response) in
-                
-                switch response.result {
-                case .success(_):
-                    completion()
-                case .failure(let error):
-                    ProgressHUD.showFailed("Fail to upload cat image. Please try again later./n \(error.localizedDescription)")
-                }
-            }
-    }
-    
-    
     // MARK: - Upload Cat Image
     /// Upload Cat Image
     /// - Parameter imageData: Image's id
@@ -154,8 +145,6 @@ class Network {
                                      fileName: "\(Date().timeIntervalSince1970).png",
                                      mimeType: "image/png")
         }
-        
-        print(#fileID, #function, #line, "- ")
 
         return Observable.create { (observer) in
             
@@ -164,7 +153,6 @@ class Network {
                 .debounce(.milliseconds(500), scheduler: MainScheduler.instance)
                 .debug()
                 .subscribe(onNext: { _ in
-                    print(#fileID, #function, #line, "테스트 - uploadCatImage:")
                     observer.onNext(())
                 })
                 .disposed(by: self.disposeBag)
@@ -233,7 +221,6 @@ class Network {
                 .validate(statusCode: 200..<300)
                 .debug()
                 .subscribe(onNext: { _ in
-                    print(#fileID, #function, #line, "테스트 - deleteFavImage: \(imageId)")
                     observer.onNext(())
                 })
                 .disposed(by: self.disposeBag)
@@ -259,7 +246,6 @@ class Network {
                 .debounce(.milliseconds(500), scheduler: MainScheduler.instance)
                 .debug()
                 .subscribe(onNext: { _ in
-                    print(#fileID, #function, #line, "테스트 - deleteFavImage: \(imageId)")
                     observer.onNext(())
                 })
                 .disposed(by: self.disposeBag)
